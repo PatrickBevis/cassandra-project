@@ -22,6 +22,11 @@ class Customer
     minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
     maxMessage: "Le nom ne doit pas dépasser {{ limit }} caractères."
 )]
+    #[Assert\Regex(message: "Le nom doit être une chaîne de caractères.",
+    pattern: '/^[a-z]+$/i',
+    htmlPattern: '^[a-zA-Z]+$'
+    )]
+
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
