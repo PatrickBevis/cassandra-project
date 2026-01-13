@@ -13,11 +13,12 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    
     <body>
     
 {% include 'partials/sidebar.html.twig' %}
 
-        <div class="bg-gray-200 min-h-screen ml-64">{% block body %}
+        <div class="bg-gray-800 min-h-screen ml-64 text-gray-100">{% block body %}
         
         {% endblock %}</div>
 
