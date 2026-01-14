@@ -27,3 +27,13 @@
 |status|quote_stat|status|LOGICAL|quote|
 |created_at|quote_created|created_at|DATE|quote|
 |is_deleted|quote_deleted|is_deleted|LOGICAL|quote|
+|Id_bill|bill_id|Id, PK|INT|bill|
+|number|bill_num|bill number|INT|bill|
+|status|bill_stat|status|LOGICAL|bill|
+|price|bill_price|price| DECIMAL(6,2)|bill|
+|is_deleted|bill_deleted|deleted|LOGICAL|bill|
+|Id_customer|customer_id|Id, PK|INT|customer|
+|company_name|customer_comp|company name|VARCHAR(50)|customer|
+|statut|customer_id|Id, PK|VARCHAR(20)|customer|
+|siret_number|customer_siret|siret number||customer|
+|phone_number|customer_phone|phone number||customer|
