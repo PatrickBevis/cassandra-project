@@ -35,5 +35,5 @@
 |Id_customer|customer_id|Id, PK|INT|customer|
 |company_name|customer_comp|company name|VARCHAR(50)|customer|
 |statut|customer_id|Id, PK|VARCHAR(20)|customer|
-|siret_number|customer_siret|siret number||customer|
-|phone_number|customer_phone|phone number||customer|
+|siret_number|customer_siret|siret number|INT|customer|
+|phone_number|customer_phone|phone number|INT|customer|
