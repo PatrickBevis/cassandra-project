@@ -3,35 +3,52 @@
 {% block title %}Customer index{% endblock %}
 
 {% block body %}
-    <h1 class= "text-3xl font-bold">Customer index</h1>
+    <h1 class= "text-3xl  text-center text-violet-400 font-bold">Customer index</h1>
 
-    <table class="table border">
-        <thead class=''>
-            <tr>
-                <th >Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for customer in customers %}
-            <tr>
-                <td>{{ customer.id }}</td>
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.email }}</td>
-                <td>
-                    <a href="{{ path('app_customer_show', {'id': customer.id}) }}">show</a>
-                    <a href="{{ path('app_customer_edit', {'id': customer.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="min-h-screen  flex items-center justify-center">
+    <div class="  w-full max-w-4xl">
+        <table class="table-auto w-full border-collapse">
+            <thead>
+                <tr class="border-b">
+                    <th class="text-left py-2 px-4">Id</th>
+                    <th class="text-left py-2 px-4">Name</th>
+                    <th class="text-left py-2 px-4">Email</th>
+                    <th class="text-left py-2 px-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr class="border-b">
+                    <td class="py-2 px-4">{{ customer.id }}</td>
+                    <td class="py-2 px-4">{{ customer.name }}</td>
+                    <td class="py-2 px-4">{{ customer.email }}</td>
+                    <td class="py-2 px-4 flex gap-3">
+                        <a href="{{ path('app_customer_show', {'id': customer.id}) }}"
+                           class="btn bg-white text-violet-700 border border-rounded px-3 font-bold">
+                            show
+                        </a>
+                        <a href="{{ path('app_customer_edit', {'id': customer.id}) }}"
+                           class="btn bg-white text-violet-700 border border-rounded px-3 font-bold">
+                            edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-4 text-gray-500">
+                        no records found
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     <div class="mt-6 text-center">
+            <a href="{{ path('app_customer_new') }}"
+               class="btn bg-white text-violet-700 border border-rounded px-3 font-bold">
+                Create new
+            </a>
+        </div>
 
-    <a href="{{ path('app_customer_new') }}" class="">Create new</a>
+
+   
 {% endblock %}
