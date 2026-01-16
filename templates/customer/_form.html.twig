@@ -3,22 +3,52 @@
     
 {{ form_end(form) }} #}
 
-{{ form_start(form) }}
+<h1 class="text-5xl p-20 text-center text-violet-400 font-bold mb-6">
+    {{ button_label|default('Create Customer') }}
+</h1>
 
-{{ form_errors(form) }}
+<div class="text-xl flex justify-center">
+    <div class="w-full max-w-xl">
+        {{ form_start(form) }}
 
-<div>
-    {{ form_label(form.name) }}
-    {{ form_widget(form.name) }}
-    {{ form_errors(form.name) }}
+        {{ form_errors(form) }}
+
+        <div class="mb-4">
+            {{ form_label(form.name, null, {
+                label_attr: { class: 'block mb-1 font-semibold' }
+            }) }}
+            {{ form_widget(form.name, {
+                attr: {
+                    class: 'w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400'
+                }
+            }) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="mb-6">
+            {{ form_label(form.email, null, {
+                label_attr: { class: 'block mb-1 font-semibold' }
+            }) }}
+            {{ form_widget(form.email, {
+                attr: {
+                    class: 'w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400'
+                }
+            }) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="flex justify-center gap-4">
+            <button class="btn bg-white text-violet-700 border px-4 font-bold">
+                {{ button_label|default('Save') }}
+            </button>
+
+            <a href="{{ path('app_customer_index') }}"
+               class="btn bg-white text-violet-700 border px-4 font-bold">
+                back to list
+            </a>
+            
+        </div>
+
+        {{ form_end(form) }}
+    </div>
 </div>
-
-<div>
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
-    {{ form_errors(form.email) }}
-</div>
-<button class="btn">{{ button_label|default('Save') }}</button>
-{# <button>Enregistrer</button> #}
-
-{{ form_end(form) }}
