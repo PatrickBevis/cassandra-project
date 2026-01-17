@@ -5,4 +5,17 @@
 {% block body %}
 
     {{ include('customer/_form.html.twig') }}
+
+    
+        <div class="flex justify-center gap-4 text-xl">
+            <button class="btn bg-white text-violet-700 border px-3 font-bold">
+                {{ button_label|default('Save') }}
+            </button>
+
+            <a href="{{ path('app_customer_index') }}"
+               class="btn bg-white text-violet-700  border px-3 font-bold">
+                back to list
+            </a>
+            
+        </div>
 {% endblock %}

@@ -4,7 +4,7 @@
 {{ form_end(form) }} #}
 
 <h1 class="text-5xl p-20 text-center text-violet-400 font-bold mb-6">
-    {{ button_label|default('Create Customer') }}
+    {{ button_label|default('Create / Edit Customer') }}
 </h1>
 
 <div class="text-xl flex justify-center">
@@ -37,17 +37,6 @@
             {{ form_errors(form.email) }}
         </div>
 
-        <div class="flex justify-center gap-4">
-            <button class="btn bg-white text-violet-700 border px-4 font-bold">
-                {{ button_label|default('Save') }}
-            </button>
-
-            <a href="{{ path('app_customer_index') }}"
-               class="btn bg-white text-violet-700 border px-4 font-bold">
-                back to list
-            </a>
-            
-        </div>
 
         {{ form_end(form) }}
     </div>
