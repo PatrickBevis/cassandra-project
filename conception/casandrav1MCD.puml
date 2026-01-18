@@ -1,0 +1,94 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+
+''''''''''Référentiels'''''''''
+
+class Role <<entity>> {
+  id : int
+  code : string
+  is_deleted : bool
+}
+
+class User <<entity>> {
+  id : int
+  lastname : string
+  firstname : string
+  email : string
+  password : string
+  created_at : datetime
+  is_deleted : bool
+}
+
+
+''''''''''' Métier''''''''''
+
+class Address <<entity>> {
+  id : int
+  street_number : int
+  street_name : string
+  complementary : string
+  zip : int
+  city : string
+  country : string
+  is_eu : bool
+  is_deleted : bool
+}
+
+class Customer <<entity>> {
+  id : int
+  company_name : string
+  statut : string
+  siret_number : string
+  phone_number : string
+  is_deleted : bool
+}
+
+class Invoice <<entity>> {
+  id : int
+  number : int
+  statut : string
+  price_taxtfree : decimal
+  price_withtax : decimal
+  is_deleted : bool
+}
+
+class Tax <<entity>> {
+  id : int
+  taux : decimal
+}
+
+class Audit <<entity>> {
+  id : int
+  type : string
+  audit_inspector_name : string
+  created_at : datetime
+  ended_at : datetime
+  statut : string
+  is_deleted : bool
+}
+
+class Report <<entity>> {
+  id : int
+  type : string
+  name : string
+  path : string
+  bits_length : int
+  created_at : datetime
+  is_deleted : bool
+}
+
+
+'''''''''''''Relations'''''''''''''
+
+Role     "1"     -- "0..*" User     : attribute
+User     "0..*"  -- "0..*" Audit    : send
+User     "0..*"  -- "0..*" Report   : receive
+Audit    "1"     -- "0..*" Report   : content
+Audit    "1..*"  -- "1..*" Customer : command
+Customer "1"     -- "0..*" Address  : live
+Customer "1"     -- "0..*" Invoice  : obtain
+Invoice  "0..*"  -- "0..*" Tax      : applicate
+
+@enduml
