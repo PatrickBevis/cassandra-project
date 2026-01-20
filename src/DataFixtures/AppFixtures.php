@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-
+use App\Entity\User;
 use App\Entity\Customer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -43,6 +43,51 @@ class AppFixtures extends Fixture
         $customer6->setname('Charles');
         $customer6->setEmail('charles@fluffy.fr');
         $manager->persist($customer6);
+
+        $user1 = new User();
+        $user1->setLastname("Bambou");
+        $user1->setFirstname("Agathe");
+        $user1->setEmail("agathe.b@fluffy.fr");
+        $user1->setPassword("123");
+        $user1->setCreatedAt(new \DateTimeImmutable('2002-06-12'));
+        $user1->setIsDeleted(false);
+        $manager->persist($user1);
+
+        $user2 = new User();
+$user2->setLastname("Dupont");
+$user2->setFirstname("Louis");
+$user2->setEmail("louis.d@fluffy.fr");
+$user2->setPassword("123");
+$user2->setCreatedAt(new \DateTimeImmutable('1998-03-25'));
+$user2->setIsDeleted(false);
+$manager->persist($user2);
+
+$user3 = new User();
+$user3->setLastname("Martin");
+$user3->setFirstname("Claire");
+$user3->setEmail("claire.m@fluffy.fr");
+$user3->setPassword("123");
+$user3->setCreatedAt(new \DateTimeImmutable('2000-11-07'));
+$user3->setIsDeleted(false);
+$manager->persist($user3);
+
+$user4 = new User();
+$user4->setLastname("Nguyen");
+$user4->setFirstname("Huy");
+$user4->setEmail("huy.n@fluffy.fr");
+$user4->setPassword("123");
+$user4->setCreatedAt(new \DateTimeImmutable('2001-08-19'));
+$user4->setIsDeleted(false);
+$manager->persist($user4);
+
+$user5 = new User();
+$user5->setLastname("Lopez");
+$user5->setFirstname("Sofia");
+$user5->setEmail("sofia.l@fluffy.fr");
+$user5->setPassword("123");
+$user5->setCreatedAt(new \DateTimeImmutable('1999-02-14'));
+$user5->setIsDeleted(false);
+$manager->persist($user5);
 
 
 
