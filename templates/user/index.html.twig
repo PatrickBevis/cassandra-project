@@ -17,6 +17,7 @@
                     <th class="py-2 px-4">Firstname</th>
                     <th class="py-2 px-4">Email</th>
                     <th class="py-2 px-4">Created at</th>
+                    <th class="py-2 px-4">Role</th>
                     <th class="py-2 px-4">Is deleted</th>
                     <th class="py-2 px-4">Actions</th>
                 </tr>
@@ -31,6 +32,7 @@
                     <td class="py-2 px-4">
                         {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
                     </td>
+                    <td class="py-2 px-4">{{ user.role ? user.role.libelle : 'No role' }}</td>
                     <td class="py-2 px-4">
                         {{ user.isDeleted ? 'Yes' : 'No' }}
                     </td>

@@ -30,8 +30,12 @@
                 <tr>
                     <th class="py-2 px-4 text-left font-semibold">Created at</th>
                     <td class="py-2 px-4">
-                        {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
+                        {{ user.createdAt ? user.createdAt|date('d-m-Y') : '' }}
                     </td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Role</th>
+                    <td class="py-2 px-4">{{user.role ? user.role.libelle : 'No role' }}</td>
                 </tr>
                 <tr>
                     <th class="py-2 px-4 text-left font-semibold">Is deleted</th>

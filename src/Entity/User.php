@@ -31,6 +31,9 @@ class User
     #[ORM\Column]
     private ?bool $is_deleted = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Role $Role = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class User
     public function setIsDeleted(bool $is_deleted): static
     {
         $this->is_deleted = $is_deleted;
+
+        return $this;
+    }
+
+    public function getRole(): ?Role
+    {
+        return $this->Role;
+    }
+
+    public function setRole(?Role $Role): static
+    {
+        $this->Role = $Role;
 
         return $this;
     }
