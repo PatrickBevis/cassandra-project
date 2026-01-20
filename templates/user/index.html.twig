@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+  <h1 class="text-5xl p-20 text-center text-violet-400 font-bold">
+    User index
+</h1>
+
+<div class="text-xl text-center flex justify-center">
+    <div class="w-full max-w-4xl">
+        <table class="table-auto w-full">
+            <thead>
+                <tr class="border-b">
+                    <th class="py-2 px-4">Id</th>
+                    <th class="py-2 px-4">Lastname</th>
+                    <th class="py-2 px-4">Firstname</th>
+                    <th class="py-2 px-4">Email</th>
+                    <th class="py-2 px-4">Created at</th>
+                    <th class="py-2 px-4">Is deleted</th>
+                    <th class="py-2 px-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class="border-b">
+                    <td class="py-2 px-4">{{ user.id }}</td>
+                    <td class="py-2 px-4">{{ user.lastname }}</td>
+                    <td class="py-2 px-4">{{ user.firstname }}</td>
+                    <td class="py-2 px-4">{{ user.email }}</td>
+                    <td class="py-2 px-4">
+                        {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
+                    </td>
+                    <td class="py-2 px-4">
+                        {{ user.isDeleted ? 'Yes' : 'No' }}
+                    </td>
+                    <td class="py-2 px-4">
+                        <div class="flex justify-center gap-6">
+                            <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                               class="btn bg-white text-violet-700 border px-3 font-bold">
+                                show
+                            </a>
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                               class="btn bg-white text-violet-700 border px-3 font-bold">
+                                edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center text-gray-500">
+                        no records found
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="mt-10 text-center">
+            <a href="{{ path('app_user_new') }}"
+               class="btn bg-white text-violet-700 border p-2 font-bold">
+                Create new
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -73,13 +73,13 @@ class Report {
 }
 
 %% Associations
-Role "1" --> "0..*" User : attribute
+Role "0.." --> "1..*" User : attribute
 User "0..*" --> "0..*" Audit : send
 User "0..*" --> "0..*" Report : receive
 Audit "1" --> "0..*" Report : content
 Audit "1..*" --> "1..*" Customer : command
 Customer "1" --> "0..*" Address : live
-Customer "1" --> "0..*" Invoice : obtain
+Customer "0.." --> "1..*" Invoice : obtain
 Invoice "0..*" --> "0..*" Tax : applicate
 
 ```

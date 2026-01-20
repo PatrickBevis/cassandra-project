@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+   <h1 class="text-5xl p-20 text-center text-violet-400 font-bold">
+    User {{ user.firstname }} {{ user.lastname }}
+</h1>
+
+<div class="text-xl flex justify-center">
+    <div class="max-w-2xl">
+        <table class="table-auto w-full border-collapse">
+            <tbody>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Id</th>
+                    <td class="py-2 px-4">{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Lastname</th>
+                    <td class="py-2 px-4">{{ user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Firstname</th>
+                    <td class="py-2 px-4">{{ user.firstname }}</td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Email</th>
+                    <td class="py-2 px-4">{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Created at</th>
+                    <td class="py-2 px-4">
+                        {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="py-2 px-4 text-left font-semibold">Is deleted</th>
+                    <td class="py-2 px-4">
+                        {{ user.isDeleted ? 'Yes' : 'No' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mt-10 flex justify-center gap-4">
+            <a href="{{ path('app_user_index') }}"
+               class="btn bg-white text-violet-700 border px-3 font-bold">
+                back to list
+            </a>
+
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+               class="btn bg-white text-violet-700 border px-3 font-bold">
+                edit
+            </a>
+
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
