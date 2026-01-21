@@ -4,28 +4,28 @@ namespace App\Controller\Admin;
 
 use App\Entity\Role;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EnumField;
 use App\Enum\RoleCode;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class RoleCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
+
+ public static function getEntityFqcn(): string
     {
         return Role::class;
     }
 
-    public function configureFields(string $pageName): iterable
+ public function configureFields(string $pageName): iterable
 {
     return [
-        EnumField::new('code')
-            ->setEnum(RoleCode::class)
-            ->renderAsBadges([
-                'Admin' => RoleCode::ADMIN,
-                'Staff' => RoleCode::STAFF,
-                'Auditor' => RoleCode::AUDITOR,
-                'Examiner' => RoleCode::EXAMINER,
+        ChoiceField::new('code')
+            ->setChoices([
+                'Admin' => RoleCode::ADMIN->value,
+                'Staff' => RoleCode::STAFF->value,
+                'Auditor' => RoleCode::AUDITOR->value,
+                'Examiner' => RoleCode::EXAMINER->value,
             ]),
     ];
 }
+
 }

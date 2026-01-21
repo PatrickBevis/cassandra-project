@@ -35,12 +35,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Roles', 'fas fa-circle', Role::class);
-        yield ChoiceField::new('code')->setChoices([
-        'Admin' => RoleCode::ADMIN,
-        'Staff' => RoleCode::STAFF,
-        'Auditor' => RoleCode::AUDITOR,
-        'Examiner' => RoleCode::EXAMINER,
-        
-    ]);
+       
     }
 }
