@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -15,14 +19,23 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterablehttps://www.startpage.com/do/search?q=esy+admin+enum+symfony&segment=startpage.vivaldi
+
+    public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+         return [
+        TextField::new('lastname'),
+        TextField::new('firstname'),
+        EmailField::new('email'),
+
+        AssociationField::new('Role')
+            ->setLabel('Rôle')
+            ->formatValue(fn($value, $user) =>
+                $user->getRole()?->getCode()?->value
+            ),
+
+        DateTimeField::new('created_at')->hideOnForm(),
+        BooleanField::new('is_deleted'),
+    ];
     }
-    */
+    
 }

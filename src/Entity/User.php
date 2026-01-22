@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -33,6 +35,17 @@ class User
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Role $Role = null;
+
+    /**
+     * @var Collection<int, Audit>
+     */
+    #[ORM\ManyToMany(targetEntity: Audit::class, mappedBy: 'User')]
+    private Collection $audits;
+
+    public function __construct()
+    {
+        $this->audits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +132,33 @@ class User
     public function setRole(?Role $Role): static
     {
         $this->Role = $Role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Audit>
+     */
+    public function getAudits(): Collection
+    {
+        return $this->audits;
+    }
+
+    public function addAudit(Audit $audit): static
+    {
+        if (!$this->audits->contains($audit)) {
+            $this->audits->add($audit);
+            $audit->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudit(Audit $audit): static
+    {
+        if ($this->audits->removeElement($audit)) {
+            $audit->removeUser($this);
+        }
 
         return $this;
     }
