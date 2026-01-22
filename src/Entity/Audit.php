@@ -17,8 +17,8 @@ class Audit
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
-    private ?string $type = null;
-
+    private ?string $title = null;
+    
     #[ORM\Column(length: 30)]
     private ?string $audit_inspector_name = null;
 
@@ -40,6 +40,8 @@ class Audit
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'audits')]
     private Collection $User;
 
+   
+
     public function __construct()
     {
         $this->User = new ArrayCollection();
@@ -50,14 +52,14 @@ class Audit
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getTitle(): ?string
     {
-        return $this->type;
+        return $this->title;
     }
 
-    public function setType(string $type): static
+    public function setTitle(string $title): static
     {
-        $this->type = $type;
+        $this->title = $title;
 
         return $this;
     }
@@ -145,4 +147,6 @@ class Audit
 
         return $this;
     }
+
+    
 }

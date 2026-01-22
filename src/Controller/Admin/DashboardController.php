@@ -3,14 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\UserCrudController;
+use App\Entity\Audit;
 use App\Entity\Role;
 use App\Entity\User;
-use App\Enum\RoleCode;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,6 +34,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Roles', 'fas fa-circle', Role::class);
+        yield MenuItem::linkToCrud('Audits', 'fas fa-pen', Audit::class);
        
     }
 }

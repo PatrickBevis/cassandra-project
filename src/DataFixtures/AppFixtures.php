@@ -2,10 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Audit;
 use App\Entity\User;
 use App\Entity\Role;
 use App\Enum\RoleCode;
 use App\Entity\Customer;
+use App\Enum\AuditStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -116,8 +118,14 @@ class AppFixtures extends Fixture
         $user5->setIsDeleted(false);
         $manager->persist($user5);
 
-
-
+        $audit1 = new Audit();
+        $audit1->setTitle("L'audit très fun !");
+        $audit1->setAuditInspectorName($user4->getLastname().' '.$user4->getFirstname());
+        $audit1->setCreatedAt(new \DateTimeImmutable('2025-11-20'));
+        $audit1->setEndedAt(new \DateTimeImmutable('2025-12-20'));
+        $audit1->setStatus(AuditStatus::ENDED);
+        $audit1->setIsDeleted(false);
+        $manager->persist($audit1);
 
 
         $manager->flush();
