@@ -42,9 +42,16 @@ class User
     #[ORM\ManyToMany(targetEntity: Audit::class, mappedBy: 'User')]
     private Collection $audits;
 
+    /**
+     * @var Collection<int, Report>
+     */
+    #[ORM\ManyToMany(targetEntity: Report::class, mappedBy: 'User')]
+    private Collection $reports;
+
     public function __construct()
     {
         $this->audits = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +165,33 @@ class User
     {
         if ($this->audits->removeElement($audit)) {
             $audit->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Report>
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): static
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+            $report->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): static
+    {
+        if ($this->reports->removeElement($report)) {
+            $report->removeUser($this);
         }
 
         return $this;

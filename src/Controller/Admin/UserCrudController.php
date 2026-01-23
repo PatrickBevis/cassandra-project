@@ -26,11 +26,10 @@ class UserCrudController extends AbstractCrudController
         TextField::new('lastname'),
         TextField::new('firstname'),
         EmailField::new('email'),
-
         AssociationField::new('Role')
             ->setLabel('Rôle')
-            ->formatValue(fn($value, $user) =>
-                $user->getRole()?->getCode()?->value
+            ->formatValue(fn($role) =>
+                $role->getCode()?->value
             ),
 
         DateTimeField::new('created_at')->hideOnForm(),

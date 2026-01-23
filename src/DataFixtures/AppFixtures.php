@@ -7,7 +7,9 @@ use App\Entity\User;
 use App\Entity\Role;
 use App\Enum\RoleCode;
 use App\Entity\Customer;
+use App\Entity\Report;
 use App\Enum\AuditStatus;
+use App\Enum\ReportType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -118,14 +120,42 @@ class AppFixtures extends Fixture
         $user5->setIsDeleted(false);
         $manager->persist($user5);
 
+        $report1 = new Report();
+        $report1->setType(ReportType::REPORT);
+        $report1->setTitle("report of socks_company");
+        $report1->setPath("src/doc/report/socks_company");
+        $report1->setBitsLength(32);
+        $report1->setCreatedAt(new \DateTimeImmutable('2025-12-22'));
+        $report1->setWrittenBy($user2->getFirstname().' '.$user2->getLastname());
+        $report1->setIsDeleted(false);
+        $manager->persist($report1);
+
         $audit1 = new Audit();
         $audit1->setTitle("L'audit très fun !");
-        $audit1->setAuditInspectorName($user4->getLastname().' '.$user4->getFirstname());
+        $audit1->setAuditInspectorName($user4->getFirstname().' '.$user4->getLastname());
         $audit1->setCreatedAt(new \DateTimeImmutable('2025-11-20'));
         $audit1->setEndedAt(new \DateTimeImmutable('2025-12-20'));
         $audit1->setStatus(AuditStatus::ENDED);
+        $audit1->setReport($report1);
         $audit1->setIsDeleted(false);
         $manager->persist($audit1);
+
+        $audit2 = new Audit();
+        $audit2->setTitle("Audit surement sympa");
+        $audit2->setCreatedAt(new \DateTimeImmutable('2026-01-18'));
+        $audit2->setStatus(AuditStatus::ASKED);
+        $audit2->setIsDeleted(false);
+        $manager->persist($audit2);
+
+        $audit3 = new Audit();
+        $audit3->setTitle("Audit woauh !");
+        $audit3->setAuditInspectorName($user4->getFirstname().' '.$user4->getLastname());
+        $audit3->setCreatedAt(new \DateTimeImmutable('2025-12-28'));
+        $audit3->setStatus(AuditStatus::INPROG);
+        $audit3->setIsDeleted(false);
+        $manager->persist($audit3);
+
+        
 
 
         $manager->flush();

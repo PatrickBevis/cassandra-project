@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\UserCrudController;
 use App\Entity\Audit;
+use App\Entity\Report;
 use App\Entity\Role;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -33,8 +34,9 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Roles', 'fas fa-circle', Role::class);
-        yield MenuItem::linkToCrud('Audits', 'fas fa-pen', Audit::class);
+        yield MenuItem::linkToCrud('Roles', 'fas fa-socks', Role::class);
+        yield MenuItem::linkToCrud('Audits', 'fas fa-hotel', Audit::class);
+        yield MenuItem::linkToCrud('Reports', 'fas fa-pen', Report::class);
        
     }
 }

@@ -19,13 +19,13 @@ class Audit
     #[ORM\Column(length: 30)]
     private ?string $title = null;
     
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 30, nullable:true)]
     private ?string $audit_inspector_name = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(nullable: false)]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $ended_at;
 
     #[ORM\Column(enumType: AuditStatus::class)]
@@ -39,6 +39,9 @@ class Audit
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'audits')]
     private Collection $User;
+
+    #[ORM\ManyToOne(inversedBy: 'Audit')]
+    private ?Report $report = null;
 
    
 
@@ -144,6 +147,18 @@ class Audit
     public function removeUser(User $user): static
     {
         $this->User->removeElement($user);
+
+        return $this;
+    }
+
+    public function getReport(): ?Report
+    {
+        return $this->report;
+    }
+
+    public function setReport(?Report $report): static
+    {
+        $this->report = $report;
 
         return $this;
     }
