@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
@@ -14,43 +13,40 @@ class Customer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
-    #[Assert\Length(
-    min: 2,
-    max: 100,
-    minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
-    maxMessage: "Le nom ne doit pas dépasser {{ limit }} caractères."
-)]
-    #[Assert\Regex(message: "Le nom doit être une chaîne de caractères.",
-    pattern: '/^[a-z]+$/i',
-    htmlPattern: '^[a-zA-Z]+$'
-    )]
+    #[ORM\Column(length: 50)]
+    private ?string $company_name = null;
 
-    private ?string $name = null;
-
-    #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "L'email est obligatoire.")]
-    #[Assert\Email(message: "L'adresse email '{{ value }}' n'est pas valide.")]
-    #[Assert\Length(
-    max: 100,
-    maxMessage: "L'email ne doit pas dépasser {{ limit }} caractères."
-)]
+    #[ORM\Column(length: 30)]
     private ?string $email = null;
+
+    #[ORM\Column(length: 14, nullable: true)]
+    private ?string $siret_number = null;
+
+    #[ORM\Column(length: 12)]
+    private ?string $phone_number = null;
+
+    #[ORM\Column]
+    private ?bool $is_deleted = null;
+
+    #[ORM\ManyToOne(inversedBy: 'customers')]
+    private ?Invoice $invoice = null;
+
+    #[ORM\ManyToOne(inversedBy: 'customer')]
+    private ?Address $address = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getCompanyName(): ?string
     {
-        return $this->name;
+        return $this->company_name;
     }
 
-    public function setName(string $name): static
+    public function setCompanyName(string $company_name): static
     {
-        $this->name = $name;
+        $this->company_name = $company_name;
 
         return $this;
     }
@@ -63,6 +59,66 @@ class Customer
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getSiretNumber(): ?string
+    {
+        return $this->siret_number;
+    }
+
+    public function setSiretNumber(?string $siret_number): static
+    {
+        $this->siret_number = $siret_number;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phone_number;
+    }
+
+    public function setPhoneNumber(string $phone_number): static
+    {
+        $this->phone_number = $phone_number;
+
+        return $this;
+    }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->is_deleted;
+    }
+
+    public function setIsDeleted(bool $is_deleted): static
+    {
+        $this->is_deleted = $is_deleted;
+
+        return $this;
+    }
+
+    public function getInvoice(): ?Invoice
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(?Invoice $invoice): static
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }

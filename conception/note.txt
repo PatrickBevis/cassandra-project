@@ -1,1 +1,7 @@
 revoir le mcd price_withtax -> decimal
+revoir le mcd numero siret -> string
+revoir le mcd numero tel -> string
+revoir le mcd statut customer statut -> remove
+revoir le mcd adress -> address
+revoir le mcd adress -> add street_way
+revoir entity tax decimal -> enum

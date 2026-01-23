@@ -41,9 +41,16 @@ class Invoice
     #[ORM\ManyToMany(targetEntity: Tax::class, mappedBy: 'invoice')]
     private Collection $taxes;
 
+    /**
+     * @var Collection<int, Customer>
+     */
+    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'invoice')]
+    private Collection $customers;
+
     public function __construct()
     {
         $this->taxes = new ArrayCollection();
+        $this->customers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +152,36 @@ class Invoice
     {
         if ($this->taxes->removeElement($tax)) {
             $tax->removeInvoice($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Customer>
+     */
+    public function getCustomers(): Collection
+    {
+        return $this->customers;
+    }
+
+    public function addCustomer(Customer $customer): static
+    {
+        if (!$this->customers->contains($customer)) {
+            $this->customers->add($customer);
+            $customer->setInvoice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCustomer(Customer $customer): static
+    {
+        if ($this->customers->removeElement($customer)) {
+            // set the owning side to null (unless already changed)
+            if ($customer->getInvoice() === $this) {
+                $customer->setInvoice(null);
+            }
         }
 
         return $this;
