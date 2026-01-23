@@ -26,7 +26,7 @@ class UserCrudController extends AbstractCrudController
         TextField::new('lastname'),
         TextField::new('firstname'),
         EmailField::new('email'),
-        AssociationField::new('Role')
+        AssociationField::new('role')
             ->setLabel('Rôle')
             ->formatValue(fn($role) =>
                 $role->getCode()?->value

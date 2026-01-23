@@ -40,7 +40,7 @@ class Audit
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'audits')]
     private Collection $User;
 
-    #[ORM\ManyToOne(inversedBy: 'Audit')]
+    #[ORM\ManyToOne(inversedBy: 'audit')]
     private ?Report $report = null;
 
    

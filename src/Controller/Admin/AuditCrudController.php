@@ -26,7 +26,7 @@ class AuditCrudController extends AbstractCrudController
          TextField::new('Audit inspector name'),
          DateTimeField::new('created_at')->hideOnForm(),
          DateTimeField::new('ended_at')->hideOnForm(),
-         ChoiceField::new('Status')
+         ChoiceField::new('status')
             ->setChoices([
                 'Asked' => AuditStatus::ASKED->value,
                 'In progress' => AuditStatus::INPROG->value,
@@ -35,7 +35,7 @@ class AuditCrudController extends AbstractCrudController
         AssociationField::new('report')
             ->setLabel('Reports')
             ->formatValue(fn($report) =>
-                $report?->getName()
+                $report?->getTitle()
                 ,
             ),
          BooleanField::new('is_deleted'),

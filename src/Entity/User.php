@@ -34,18 +34,18 @@ class User
     private ?bool $is_deleted = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Role $Role = null;
+    private ?Role $role = null;
 
     /**
      * @var Collection<int, Audit>
      */
-    #[ORM\ManyToMany(targetEntity: Audit::class, mappedBy: 'User')]
+    #[ORM\ManyToMany(targetEntity: Audit::class, mappedBy: 'user')]
     private Collection $audits;
 
     /**
      * @var Collection<int, Report>
      */
-    #[ORM\ManyToMany(targetEntity: Report::class, mappedBy: 'User')]
+    #[ORM\ManyToMany(targetEntity: Report::class, mappedBy: 'user')]
     private Collection $reports;
 
     public function __construct()
@@ -133,12 +133,12 @@ class User
 
     public function getRole(): ?Role
     {
-        return $this->Role;
+        return $this->role;
     }
 
-    public function setRole(?Role $Role): static
+    public function setRole(?Role $role): static
     {
-        $this->Role = $Role;
+        $this->role = $role;
 
         return $this;
     }
