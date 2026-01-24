@@ -38,7 +38,7 @@ class Audit
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'audits')]
-    private Collection $User;
+    private Collection $user;
 
     #[ORM\ManyToOne(inversedBy: 'audit')]
     private ?Report $report = null;
@@ -47,7 +47,7 @@ class Audit
 
     public function __construct()
     {
-        $this->User = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,13 +132,13 @@ class Audit
      */
     public function getUser(): Collection
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function addUser(User $user): static
     {
-        if (!$this->User->contains($user)) {
-            $this->User->add($user);
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
         }
 
         return $this;
@@ -146,7 +146,7 @@ class Audit
 
     public function removeUser(User $user): static
     {
-        $this->User->removeElement($user);
+        $this->user->removeElement($user);
 
         return $this;
     }

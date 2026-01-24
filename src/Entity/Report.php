@@ -38,21 +38,21 @@ class Report
      * @var Collection<int, Audit>
      */
     #[ORM\OneToMany(targetEntity: Audit::class, mappedBy: 'report')]
-    private Collection $Audit;
+    private Collection $audit;
 
     /**
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'reports')]
-    private Collection $User;
+    private Collection $user;
 
     #[ORM\Column(length: 30)]
     private ?string $writtenBy = null;
 
     public function __construct()
     {
-        $this->Audit = new ArrayCollection();
-        $this->User = new ArrayCollection();
+        $this->audit = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,19 +131,22 @@ class Report
 
         return $this;
     }
-
+     public function __toString(): string
+    {
+        return $this->title ?? '';
+    }
     /**
      * @return Collection<int, Audit>
      */
     public function getAudit(): Collection
     {
-        return $this->Audit;
+        return $this->audit;
     }
 
     public function addAudit(Audit $audit): static
     {
-        if (!$this->Audit->contains($audit)) {
-            $this->Audit->add($audit);
+        if (!$this->audit->contains($audit)) {
+            $this->audit->add($audit);
             $audit->setReport($this);
         }
 
@@ -152,7 +155,7 @@ class Report
 
     public function removeAudit(Audit $audit): static
     {
-        if ($this->Audit->removeElement($audit)) {
+        if ($this->audit->removeElement($audit)) {
             // set the owning side to null (unless already changed)
             if ($audit->getReport() === $this) {
                 $audit->setReport(null);
@@ -167,13 +170,13 @@ class Report
      */
     public function getUser(): Collection
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function addUser(User $user): static
     {
-        if (!$this->User->contains($user)) {
-            $this->User->add($user);
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
         }
 
         return $this;
@@ -181,7 +184,7 @@ class Report
 
     public function removeUser(User $user): static
     {
-        $this->User->removeElement($user);
+        $this->user->removeElement($user);
 
         return $this;
     }

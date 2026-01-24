@@ -23,7 +23,7 @@ class AuditCrudController extends AbstractCrudController
     {
         return [
          TextField::new('title'),
-         TextField::new('Audit inspector name'),
+         TextField::new('auditInspectorName'),
          DateTimeField::new('created_at')->hideOnForm(),
          DateTimeField::new('ended_at')->hideOnForm(),
          ChoiceField::new('status')
@@ -36,7 +36,6 @@ class AuditCrudController extends AbstractCrudController
             ->setLabel('Reports')
             ->formatValue(fn($report) =>
                 $report?->getTitle()
-                ,
             ),
          BooleanField::new('is_deleted'),
     ];

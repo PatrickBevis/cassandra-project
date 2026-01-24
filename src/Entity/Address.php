@@ -25,7 +25,7 @@ class Address
     #[ORM\Column(length: 30)]
     private ?string $street_name = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $street_complementary = null;
 
     #[ORM\Column]

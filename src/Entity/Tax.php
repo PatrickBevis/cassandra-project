@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use App\Enum\TaxRate;
 use App\Repository\TaxRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaxRepository::class)]
@@ -16,14 +17,16 @@ class Tax
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 1)]
-    private ?string $rate = null;
+   
 
     /**
      * @var Collection<int, Invoice>
      */
     #[ORM\ManyToMany(targetEntity: Invoice::class, inversedBy: 'taxes')]
     private Collection $invoice;
+
+    #[ORM\Column(enumType: TaxRate::class)]
+    private ?TaxRate $rate = null;
 
     public function __construct()
     {
@@ -35,17 +38,6 @@ class Tax
         return $this->id;
     }
 
-    public function getRate(): ?string
-    {
-        return $this->rate;
-    }
-
-    public function setRate(string $rate): static
-    {
-        $this->rate = $rate;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Invoice>
@@ -67,6 +59,18 @@ class Tax
     public function removeInvoice(Invoice $invoice): static
     {
         $this->invoice->removeElement($invoice);
+
+        return $this;
+    }
+
+    public function getRate(): ?TaxRate
+    {
+        return $this->rate;
+    }
+
+    public function setRate(TaxRate $rate): static
+    {
+        $this->rate = $rate;
 
         return $this;
     }

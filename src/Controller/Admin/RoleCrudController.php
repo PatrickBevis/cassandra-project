@@ -6,6 +6,7 @@ use App\Entity\Role;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use App\Enum\RoleCode;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class RoleCrudController extends AbstractCrudController
 {
@@ -25,6 +26,7 @@ class RoleCrudController extends AbstractCrudController
                 'Auditor' => RoleCode::AUDITOR->value,
                 'Examiner' => RoleCode::EXAMINER->value,
             ]),
+        TextField::new('libelle'),
     ];
 }
 

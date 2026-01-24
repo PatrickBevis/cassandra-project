@@ -29,9 +29,9 @@ class ReportCrudController extends AbstractCrudController
             ]),
             TextField::new('title'),
             TextField::new('path'),
-            IntegerField::new("bits length"),
+            IntegerField::new("bitsLength"),
             DateTimeField::new('created_at')->hideOnForm(),
-            TextField::new('Written by'),
+            TextField::new('WrittenBy'),
             BooleanField::new('is_deleted'),
         ];
     }
