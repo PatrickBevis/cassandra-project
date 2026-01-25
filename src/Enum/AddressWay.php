@@ -3,7 +3,8 @@
 namespace App\Enum;
 
 enum AddressWay: string {
-    case ST = 'RUE';
-    case BLV = 'BOULEVARD';
-    case AVN = 'AVENUE';
+    case ST = 'Rue';
+    case BLV = 'Boulevard';
+    case AVN = 'Avenue';
+
 }

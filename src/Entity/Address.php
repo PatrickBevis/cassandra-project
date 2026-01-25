@@ -19,7 +19,7 @@ class Address
     #[ORM\Column]
     private ?int $street_number = null;
 
-    #[ORM\Column(enumType: AddressWay::class)]
+    #[ORM\Column(length:30, enumType:AddressWay::class)]
     private ?AddressWay $street_way = null;
 
     #[ORM\Column(length: 30)]
