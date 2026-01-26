@@ -29,7 +29,7 @@ class UserCrudController extends AbstractCrudController
         AssociationField::new('role')
             ->setLabel('Rôle')
             ->formatValue(fn($role) =>
-                $role->getCode()->value
+                $role->getcode()->value
             ),
 
         DateTimeField::new('created_at')->hideOnForm(),

@@ -3,7 +3,10 @@
 namespace App\Enum;
 
 enum AuditStatus: string {
-    case ASKED = 'ASKED';
-    case INPROG = 'IN PROGRESS';
-    case ENDED = 'ENDED';
+    case ASKED = 'Asked';
+    case INPROG = 'InProgress';
+    case ENDED = 'Ended';
+
+
+    
 }

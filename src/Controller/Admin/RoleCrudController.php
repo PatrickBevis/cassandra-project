@@ -21,10 +21,10 @@ class RoleCrudController extends AbstractCrudController
     return [
         ChoiceField::new('code')
             ->setChoices([
-                'Admin' => RoleCode::ADMIN->value,
-                'Staff' => RoleCode::STAFF->value,
-                'Auditor' => RoleCode::AUDITOR->value,
-                'Examiner' => RoleCode::EXAMINER->value,
+                'Admin' => RoleCode::ADMIN,
+                'Staff' => RoleCode::STAFF,
+                'Auditor' => RoleCode::AUDITOR,
+                'Examiner' => RoleCode::EXAMINER,
             ]),
         TextField::new('libelle'),
     ];

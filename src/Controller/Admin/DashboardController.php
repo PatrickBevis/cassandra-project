@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\UserCrudController;
 use App\Entity\Address;
 use App\Entity\Audit;
+use App\Entity\Invoice;
 use App\Entity\Report;
 use App\Entity\Role;
 use App\Entity\User;
@@ -39,6 +40,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Audits', 'fas fa-hotel', Audit::class);
         yield MenuItem::linkToCrud('Reports', 'fas fa-pen', Report::class);
         yield MenuItem::linkToCrud('Addresses', 'fas fa-street-view', Address::class);
-       
+        yield MenuItem::linkToCrud('Invoices', 'fas fa-leaf', Invoice::class);
     }
 }

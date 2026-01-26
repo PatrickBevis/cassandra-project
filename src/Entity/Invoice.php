@@ -47,6 +47,9 @@ class Invoice
     #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'invoice')]
     private Collection $customers;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $total = null;
+
     public function __construct()
     {
         $this->taxes = new ArrayCollection();
@@ -183,6 +186,18 @@ class Invoice
                 $customer->setInvoice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): static
+    {
+        $this->total = $total;
 
         return $this;
     }

@@ -23,9 +23,9 @@ class ReportCrudController extends AbstractCrudController
         return [
             ChoiceField::new('type')
             ->setChoices([
-                'Mission Letter' => ReportType::MISSIONL->value,
-                'Mandats' => ReportType::MANDAT->value,
-                'Report' => ReportType::REPORT->value,
+                'MissionLetter' => ReportType::MISSIONL,
+                'Mandats' => ReportType::MANDAT,
+                'Report' => ReportType::REPORT,
             ]),
             TextField::new('title'),
             TextField::new('path'),

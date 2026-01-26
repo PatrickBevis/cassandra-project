@@ -3,8 +3,8 @@
 namespace App\Enum;
 
 enum RoleCode: string {
-    case ADMIN = 'ADMIN';
-    case AUDITOR = 'AUDITOR';
-    case EXAMINER = 'EXAMINER';
-    case STAFF = 'STAFF';
+    case ADMIN = 'Admin';
+    case AUDITOR = 'Auditor';
+    case EXAMINER = 'Examiner';
+    case STAFF = 'Staff';
 }
