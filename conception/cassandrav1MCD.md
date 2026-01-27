@@ -44,7 +44,7 @@ class Invoice {
   string statut
   decimal price_taxtfree
   decimal price_withtax
-  decimal total
+  decimal price_total
   boolean is_deleted
 }
 
