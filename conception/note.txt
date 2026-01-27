@@ -5,4 +5,5 @@ revoir le mcd statut customer statut -> remove
 revoir le mcd adress -> address
 revoir le mcd adress -> add street_way
 revoir entity tax decimal -> enum
+revoir le mcd tax taux -> rate
 revoir le mcd invoice -> total

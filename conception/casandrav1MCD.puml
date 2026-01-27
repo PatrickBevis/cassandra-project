@@ -56,7 +56,7 @@ class Invoice <<entity>> {
 
 class Tax <<entity>> {
   id : int
-  taux : decimal
+  rate : enum
 }
 
 class Audit <<entity>> {

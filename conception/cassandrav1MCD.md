@@ -49,7 +49,7 @@ class Invoice {
 
 class Tax {
   int id_tax
-  decimal taux
+  enum rate
 }
 
 class Audit {
