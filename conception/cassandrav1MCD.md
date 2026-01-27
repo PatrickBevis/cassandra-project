@@ -1,5 +1,6 @@
 ```mermaid
 classDiagram
+direction LR
 
 class Role {
   int id_role

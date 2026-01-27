@@ -7,9 +7,19 @@ revoir le mcd adress -> add street_way
 revoir entity tax decimal -> enum
 revoir le mcd tax taux -> rate
 revoir le mcd invoice -> total
+revoir dico des données type -> enum (là ou il faut)
 
 comment gerer les tables d'associations (revoir les cardinalités (tax)?)?
 Peut-on  definir un user qui a un role specifique pour audit ?
 Contraintes dans les entity ou on peux faire ca avec easyadmin ?
 Est ce que je mets enum dans le dico des données ?
+"Encadrer le cahier des charges ne prévoit pas ce cas de figure mais on reste à l'écoute du client pour des modifs"
 
+relier Audit et Invoice et effacer Customer et Invoice
+revoir le mermaid en cascade...
+rajouter lastname et firstname Customer
+faire une entité raw
+document Audit enum juridique ou non
+gerer la certification 
+
+Agent IA

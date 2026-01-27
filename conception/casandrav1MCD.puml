@@ -1,9 +1,10 @@
 @startuml Cassandra
+left to right direction
 hide circle
 skinparam classAttributeIconSize 0
 
 
-''''''''''Référentiels'''''''''
+
 
 class Role <<entity>> {
   id : int
@@ -22,7 +23,7 @@ class User <<entity>> {
 }
 
 
-''''''''''' Métier''''''''''
+
 
 class Address <<entity>> {
   id : int
@@ -81,7 +82,7 @@ class Report <<entity>> {
 }
 
 
-'''''''''''''Relations'''''''''''''
+
 
 Role     "0.."   -- "1..*" User     : attribute
 User     "0..*"  -- "0..*" Audit    : send

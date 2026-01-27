@@ -17,8 +17,8 @@
 | street_name          | adr_name              | street name          | VARCHAR(30)      | adress    | 🟦  |
 | complementary        | adr_compl             | adress complementary | VARCHAR(50)      | adress    | 🟦  |
 | zip                  | adr_zip               | zip                  | INT              | adress    | 🟦  |
-| city                 | adr_city              | city                 | Varchar(30)      | adress    | 🟦  |
-| country              | adr_country           | country              | Varchar(20)      | adress    | 🟦  |
+| city                 | adr_city              | city                 | VARCHAR(30)      | adress    | 🟦  |
+| country              | adr_country           | country              | VARCHAR(20)      | adress    | 🟦  |
 | is_eu                | adr_eu                | european union       | LOGICAL          | adress    | 🟦  |
 | is_deleted           | adr_deleted           | is_deleted           | LOGICAL          | adress    | 🟦  |
 | Id_invoice           | invoice_id            | Id, PK               | INT              | invoice   | 🟪  |
@@ -29,7 +29,7 @@
 | price_total          | invoice_price_total   | price total          | DECIMAL(6,2)     | invoice   | 🟪  |
 | is_deleted           | invoice_deleted       | deleted              | LOGICAL          | invoice   | 🟪  |
 | Id_tax               | tax_id                | Id, PK               | INT              | tax       | 🟨  |
-| rate                 | tax_rate              | rate tax             | enum             | tax       | 🟨  |
+| rate                 | tax_rate              | rate tax             | ENUM             | tax       | 🟨  |
 | Id_audit             | audit_id              | Id, PK               | INT              | audit     | ⬛  |
 | type                 | audit_type            | type                 | VARCHAR(30)      | audit     | ⬛  |
 | audit_inspector_name | audit_inspector_name  | inspector name       | VARCHAR(30)      | audit     | ⬛  |
