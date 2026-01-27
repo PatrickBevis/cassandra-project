@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Address;
 use App\Enum\AddressWay;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -36,6 +37,11 @@ class AddressCrudController extends AbstractCrudController
             TextField::new('City'),
             TextField::new('Country'),
             BooleanField::new('is_EU'),
+            AssociationField::new('customer')
+            ->setLabel('Customer')
+            ->formatValue(fn($customer) =>
+                $customer->getCompanyName()
+            ),
             BooleanField::new('is_deleted'),
 
 

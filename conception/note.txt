@@ -10,3 +10,5 @@ revoir le mcd invoice -> total
 
 comment gerer les tables d'associations (revoir les cardinalités (tax)?)?
 Peut-on  definir un user qui a un role specifique pour audit ?
+Contraintes dans les entity ou on peux faire ca avec easyadmin ?
+

@@ -26,6 +26,7 @@
 | status               | invoice_stat          | status               | LOGICAL          | invoice   | 🟪  |
 | price_taxfree        | invoice_price_taxfree | price tax free       | DECIMAL(6,2)     | invoice   | 🟪  |
 | price_withtax        | invoice_price_withtax | price with tax       | DECIMAL(6,2)     | invoice   | 🟪  |
+| price_total          | invoice_price_total   | price total          | DECIMAL(6,2)     | invoice   | 🟪  |
 | is_deleted           | invoice_deleted       | deleted              | LOGICAL          | invoice   | 🟪  |
 | Id_tax               | tax_id                | Id, PK               | INT              | tax       | 🟨  |
 | taux                 | tax_rate              | rate taxes           | enum             | tax       | 🟨  |
