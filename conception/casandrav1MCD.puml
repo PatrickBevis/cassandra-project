@@ -51,6 +51,7 @@ class Invoice <<entity>> {
   statut : string
   price_taxtfree : decimal
   price_withtax : decimal
+  total : decimal
   is_deleted : bool
 }
 
