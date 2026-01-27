@@ -8,6 +8,7 @@ use App\Entity\Audit;
 use App\Entity\Invoice;
 use App\Entity\Report;
 use App\Entity\Role;
+use App\Entity\Tax;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -40,6 +41,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Audits', 'fas fa-hotel', Audit::class);
         yield MenuItem::linkToCrud('Reports', 'fas fa-pen', Report::class);
         yield MenuItem::linkToCrud('Addresses', 'fas fa-street-view', Address::class);
-        yield MenuItem::linkToCrud('Invoices', 'fas fa-leaf', Invoice::class);
+        yield MenuItem::linkToCrud('Invoices', 'fas  fa-file-invoice-dollar', Invoice::class);
+        yield MenuItem::linkToCrud('Taxes', 'fas  fa-money-check', Tax::class);
+
     }
 }

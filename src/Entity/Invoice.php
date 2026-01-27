@@ -121,6 +121,18 @@ class Invoice
         return $this;
     }
 
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): static
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+    
     public function isDeleted(): ?bool
     {
         return $this->is_deleted;
@@ -190,15 +202,5 @@ class Invoice
         return $this;
     }
 
-    public function getTotal(): ?string
-    {
-        return $this->total;
-    }
-
-    public function setTotal(string $total): static
-    {
-        $this->total = $total;
-
-        return $this;
-    }
+    
 }
