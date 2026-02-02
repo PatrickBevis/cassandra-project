@@ -3,8 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\CustomerRepository;
+use App\Validator\Regex;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
+#[UniqueEntity(fields: ['email'], message: 'Email used.')]
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
 {
@@ -14,15 +19,31 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank("Obligatory field")]
     private ?string $company_name = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 30, unique:true)]
+    #[Assert\NotBlank("Obligatory field")]
+    #[Assert\Regex(
+        pattern: Regex::EMAIL,
+        message: 'Invalid email'
+    )]
+
     private ?string $email = null;
 
     #[ORM\Column(length: 14, nullable: true)]
+    #[Assert\Regex(
+        pattern: Regex::SIRET,
+        message: 'Invalid siret'
+    )]
     private ?string $siret_number = null;
 
     #[ORM\Column(length: 12)]
+    #[Assert\NotBlank("Obligatory field")]
+    #[Assert\Regex(
+        pattern: Regex::PHONE,
+        message: 'Invalid phone number'
+    )]
     private ?string $phone_number = null;
 
     #[ORM\Column]
