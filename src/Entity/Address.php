@@ -40,10 +40,7 @@ class Address
     #[ORM\Column]
     private ?bool $is_EU = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    /**
+       /**
      * @var Collection<int, Customer>
      */
     #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'address')]
@@ -155,16 +152,9 @@ class Address
         return $this;
     }
 
-    public function isDeleted(): ?bool
+    public function __toString(): string
     {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
+        return $this->getCity() ?? 'Address';
     }
 
     /**

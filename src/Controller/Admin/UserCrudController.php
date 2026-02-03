@@ -33,7 +33,7 @@ class UserCrudController extends AbstractCrudController
             ),
 
         DateTimeField::new('created_at')->hideOnForm(),
-        BooleanField::new('is_deleted'),
+        
     ];
     }
     

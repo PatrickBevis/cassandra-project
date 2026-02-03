@@ -28,11 +28,10 @@ class CustomerCrudController extends AbstractCrudController
             TextField::new('siretNumber'),
             TextField::new('phoneNumber'),
             AssociationField::new('invoice')
-            ->setLabel('Invoice')
-            ->formatValue(fn($invoice) =>
-                $invoice->getNumber()
-            ),
-            BooleanField::new('is_deleted'),
+            ->setLabel('Invoice'),
+            AssociationField::new('address')
+            ->setLabel('Address'),
+           
 
         ];
     }

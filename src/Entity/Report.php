@@ -31,9 +31,6 @@ class Report
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
     /**
      * @var Collection<int, Audit>
      */
@@ -120,17 +117,6 @@ class Report
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
      public function __toString(): string
     {
         return $this->title ?? '';

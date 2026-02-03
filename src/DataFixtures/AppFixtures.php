@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
         $user1->setPassword("123");
         $user1->setCreatedAt(new \DateTimeImmutable('1988-06-12'));
         $user1->setRole($roleAdmin);
-        $user1->setIsDeleted(false);
+       
         $manager->persist($user1);
 
         $user2 = new User();
@@ -57,7 +57,7 @@ class AppFixtures extends Fixture
         $user2->setPassword("123");
         $user2->setCreatedAt(new \DateTimeImmutable('1998-03-25'));
         $user2->setRole($roleStaff);
-        $user2->setIsDeleted(false);
+      
         $manager->persist($user2);
         
         $user3 = new User();
@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
         $user3->setPassword("123");
         $user3->setCreatedAt(new \DateTimeImmutable('2000-11-07'));
         $user3->setRole($roleStaff);
-        $user3->setIsDeleted(false);
+        
         $manager->persist($user3);
         
         $user4 = new User();
@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
         $user4->setPassword("123");
         $user4->setCreatedAt(new \DateTimeImmutable('2001-08-19'));
         $user4->setRole($roleAuditor);
-        $user4->setIsDeleted(false);
+      
         $manager->persist($user4);
         
         $user5 = new User();
@@ -87,17 +87,17 @@ class AppFixtures extends Fixture
         $user5->setPassword("123");
         $user5->setCreatedAt(new \DateTimeImmutable('1999-02-14'));
         $user5->setRole($roleExaminer);
-        $user5->setIsDeleted(false);
+        
         $manager->persist($user5);
 
         $report1 = new Report();
         $report1->setType(ReportType::REPORT);
-        $report1->setTitle("report of socks_company");
+        $report1->setTitle("rehttp://127.0.0.1:8000/admin/customer/newport of socks_company");
         $report1->setPath("src/doc/report/socks_company");
         $report1->setBitsLength(32);
         $report1->setCreatedAt(new \DateTimeImmutable('2025-12-22'));
         $report1->setWrittenBy($user2->getFirstname().' '.$user2->getLastname());
-        $report1->setIsDeleted(false);
+      
         $manager->persist($report1);
 
         $audit1 = new Audit();
@@ -107,14 +107,14 @@ class AppFixtures extends Fixture
         $audit1->setEndedAt(new \DateTimeImmutable('2025-12-20'));
         $audit1->setStatus(AuditStatus::ENDED);
         $audit1->setReport($report1);
-        $audit1->setIsDeleted(false);
+      
         $manager->persist($audit1);
 
         $audit2 = new Audit();
         $audit2->setTitle("Audit surement sympa");
         $audit2->setCreatedAt(new \DateTimeImmutable('2026-01-18'));
         $audit2->setStatus(AuditStatus::ASKED);
-        $audit2->setIsDeleted(false);
+       
         $manager->persist($audit2);
 
         $audit3 = new Audit();
@@ -122,7 +122,7 @@ class AppFixtures extends Fixture
         $audit3->setAuditInspectorName($user4->getFirstname().' '.$user4->getLastname());
         $audit3->setCreatedAt(new \DateTimeImmutable('2025-12-28'));
         $audit3->setStatus(AuditStatus::INPROG);
-        $audit3->setIsDeleted(false);
+        
         $manager->persist($audit3);
 
         

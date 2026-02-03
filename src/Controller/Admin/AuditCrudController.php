@@ -33,11 +33,9 @@ class AuditCrudController extends AbstractCrudController
                 'Ended' => AuditStatus::ENDED,
             ]),  
         AssociationField::new('report')
-            ->setLabel('Reports')
-            ->formatValue(fn($report) =>
-                $report?->getTitle()
-            ),
-         BooleanField::new('is_deleted'),
+            ->setLabel('Reports'),
+            
+       
     ];
     }
     

@@ -31,9 +31,7 @@ class Audit
     #[ORM\Column(enumType: AuditStatus::class)]
     private ?AuditStatus $status = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
+   
     /**
      * @var Collection<int, User>
      */
@@ -114,19 +112,11 @@ class Audit
 
         return $this;
     }
-
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
+public function __toString(): string
+{
+    return $this->getTitle() ?? 'Audit';
+}
+   
     /**
      * @return Collection<int, User>
      */

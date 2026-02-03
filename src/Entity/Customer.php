@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[UniqueEntity(fields: ['email'], message: 'Email used.')]
+#[UniqueEntity(fields: ['siret_number'], message: 'SIRET used.')]
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
 {
@@ -19,11 +20,11 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank("Obligatory field")]
+    #[Assert\NotBlank(message:"Obligatory field")]
     private ?string $company_name = null;
 
     #[ORM\Column(length: 30, unique:true)]
-    #[Assert\NotBlank("Obligatory field")]
+    #[Assert\NotBlank(message:"Obligatory field")]
     #[Assert\Regex(
         pattern: Regex::EMAIL,
         message: 'Invalid email'
@@ -38,18 +39,16 @@ class Customer
     )]
     private ?string $siret_number = null;
 
-    #[ORM\Column(length: 12)]
-    #[Assert\NotBlank("Obligatory field")]
+    #[ORM\Column(length: 15)]
+    #[Assert\NotBlank(message:"Obligatory field")]
     #[Assert\Regex(
         pattern: Regex::PHONE,
         message: 'Invalid phone number'
     )]
     private ?string $phone_number = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
 
-    #[ORM\ManyToOne(inversedBy: 'customers')]
+    #[ORM\ManyToOne(inversedBy: 'customer')]
     private ?Invoice $invoice = null;
 
     #[ORM\ManyToOne(inversedBy: 'customer')]
@@ -108,17 +107,10 @@ class Customer
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
+   public function __toString(): string
+{
+    return $this->getCompanyName() ?? 'Customer';
+}
 
     public function getInvoice(): ?Invoice
     {

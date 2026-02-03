@@ -30,8 +30,6 @@ class User
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Role $role = null;
@@ -119,17 +117,6 @@ class User
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
 
     public function getRole(): ?Role
     {

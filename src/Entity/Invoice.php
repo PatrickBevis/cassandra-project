@@ -32,14 +32,9 @@ class Invoice
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $price_withtax = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
+    #[ORM\ManyToOne(inversedBy: 'invoice')]
+    private ?Tax $tax = null;
 
-    /**
-     * @var Collection<int, Tax>
-     */
-    #[ORM\ManyToMany(targetEntity: Tax::class, mappedBy: 'invoice')]
-    private Collection $taxes;
 
     /**
      * @var Collection<int, Customer>
@@ -52,8 +47,8 @@ class Invoice
 
     public function __construct()
     {
-        $this->taxes = new ArrayCollection();
         $this->customers = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -121,53 +116,19 @@ class Invoice
         return $this;
     }
 
-    public function getTotal(): ?string
+    public function __toString(): string
     {
-        return $this->total;
+        return $this->getNumber() ?? 'Invoice';
     }
 
-    public function setTotal(string $total): static
+ public function getTax(): ?Tax
     {
-        $this->total = $total;
-
-        return $this;
-    }
-    
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
+        return $this->tax;
     }
 
-    public function setIsDeleted(bool $is_deleted): static
+    public function setTax(?Tax $tax): static
     {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tax>
-     */
-    public function getTaxes(): Collection
-    {
-        return $this->taxes;
-    }
-
-    public function addTax(Tax $tax): static
-    {
-        if (!$this->taxes->contains($tax)) {
-            $this->taxes->add($tax);
-            $tax->addInvoice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTax(Tax $tax): static
-    {
-        if ($this->taxes->removeElement($tax)) {
-            $tax->removeInvoice($this);
-        }
+        $this->tax = $tax;
 
         return $this;
     }

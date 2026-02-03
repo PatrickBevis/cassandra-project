@@ -27,9 +27,9 @@ class AddressCrudController extends AbstractCrudController
             IntegerField::new("streetNumber"),
             ChoiceField::new('streetWay')
             ->setChoices([
-                'Rue'=> AddressWay::ST,
-                'Boulevard' => AddressWay::BLV,
-                'Avenue' => AddressWay::AVN,
+                'Rue'=> AddressWay::ST->value,
+                'Boulevard' => AddressWay::BLV->value,
+                'Avenue' => AddressWay::AVN->value,
             ]),  
             TextField::new('streetName'),
             TextField::new('streetComplementary'),
@@ -37,12 +37,7 @@ class AddressCrudController extends AbstractCrudController
             TextField::new('City'),
             TextField::new('Country'),
             BooleanField::new('is_EU'),
-            AssociationField::new('customer')
-            ->setLabel('Customer')
-            ->formatValue(fn($customer) =>
-                $customer->getCompanyName()
-            ),
-            BooleanField::new('is_deleted'),
+           
 
 
 

@@ -32,7 +32,7 @@ class ReportCrudController extends AbstractCrudController
             IntegerField::new("bitsLength"),
             DateTimeField::new('created_at')->hideOnForm(),
             TextField::new('WrittenBy'),
-            BooleanField::new('is_deleted'),
+            
         ];
     }
     
