@@ -154,7 +154,35 @@ class Address
 
     public function __toString(): string
     {
-        return $this->getCity() ?? 'Address';
+        $parts = [];
+    
+    if ($this->getStreetNumber()) {
+        $parts[] = $this->getStreetNumber();
+    }
+
+    if ($this->getStreetWay()) {
+        $parts[] = $this->getStreetWay()->value;
+    }
+
+
+    if ($this->getStreetName()) {
+        $parts[] = $this->getStreetName();
+    }
+
+    if ($this->getStreetComplementary()) {
+        $parts[] = $this->getStreetComplementary();
+    }
+
+    if ($this->getZip()) {
+        $parts[] = $this->getZip();
+    }
+
+
+    if ($this->getCity()) {
+        $parts[] = $this->getCity();
+    }
+
+    return !empty($parts) ? implode(' ', $parts) : 'Address';
     }
 
     /**

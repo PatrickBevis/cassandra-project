@@ -28,9 +28,9 @@ class AuditCrudController extends AbstractCrudController
          DateTimeField::new('ended_at')->hideOnForm(),
          ChoiceField::new('status')
             ->setChoices([
-                'Asked'=> AuditStatus::ASKED,
-                'InProgress' => AuditStatus::INPROG,
-                'Ended' => AuditStatus::ENDED,
+                'Asked'=> AuditStatus::ASKED->value,
+                'InProgress' => AuditStatus::INPROG->value,
+                'Ended' => AuditStatus::ENDED->value,
             ]),  
         AssociationField::new('report')
             ->setLabel('Reports'),

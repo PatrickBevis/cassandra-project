@@ -92,7 +92,7 @@ class AppFixtures extends Fixture
 
         $report1 = new Report();
         $report1->setType(ReportType::REPORT);
-        $report1->setTitle("rehttp://127.0.0.1:8000/admin/customer/newport of socks_company");
+        $report1->setTitle("report of socks_company");
         $report1->setPath("src/doc/report/socks_company");
         $report1->setBitsLength(32);
         $report1->setCreatedAt(new \DateTimeImmutable('2025-12-22'));

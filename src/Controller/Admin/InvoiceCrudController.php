@@ -40,6 +40,8 @@ class InvoiceCrudController extends AbstractCrudController
             AssociationField::new('tax')
             ->setLabel('tax'),
             NumberField::new('priceWithTax')->setDecimalSeparator(','),
+            AssociationField::new('customer')
+            ->setLabel('Customer')
            
         ];
     }

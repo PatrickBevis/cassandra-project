@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Enum\InvoiceStatus;
 use App\Repository\InvoiceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,24 +30,20 @@ class Invoice
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $price_withtax = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customer $customer = null;
+
     #[ORM\ManyToOne(inversedBy: 'invoice')]
     private ?Tax $tax = null;
 
-
-    /**
-     * @var Collection<int, Customer>
-     */
-    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'invoice')]
-    private Collection $customers;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
-    private ?string $total = null;
-
     public function __construct()
     {
-        $this->customers = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
 
     }
+
+    
 
     public function getId(): ?int
     {
@@ -64,7 +58,6 @@ class Invoice
     public function setNumber(int $number): static
     {
         $this->number = $number;
-
         return $this;
     }
 
@@ -76,7 +69,6 @@ class Invoice
     public function setStatus(InvoiceStatus $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -88,7 +80,6 @@ class Invoice
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 
@@ -100,7 +91,6 @@ class Invoice
     public function setPriceTaxfree(string $price_taxfree): static
     {
         $this->price_taxfree = $price_taxfree;
-
         return $this;
     }
 
@@ -112,16 +102,21 @@ class Invoice
     public function setPriceWithtax(string $price_withtax): static
     {
         $this->price_withtax = $price_withtax;
-
         return $this;
     }
 
-    public function __toString(): string
+    public function getCustomer(): ?Customer
     {
-        return $this->getNumber() ?? 'Invoice';
+        return $this->customer;
     }
 
- public function getTax(): ?Tax
+    public function setCustomer(?Customer $customer): static
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
+    public function getTax(): ?Tax
     {
         return $this->tax;
     }
@@ -129,39 +124,12 @@ class Invoice
     public function setTax(?Tax $tax): static
     {
         $this->tax = $tax;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Customer>
-     */
-    public function getCustomers(): Collection
+
+    public function __toString(): string
     {
-        return $this->customers;
+        return $this->number !== null ? (string) $this->number : 'Invoice';
     }
-
-    public function addCustomer(Customer $customer): static
-    {
-        if (!$this->customers->contains($customer)) {
-            $this->customers->add($customer);
-            $customer->setInvoice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): static
-    {
-        if ($this->customers->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getInvoice() === $this) {
-                $customer->setInvoice(null);
-            }
-        }
-
-        return $this;
-    }
-
-    
 }

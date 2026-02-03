@@ -27,9 +27,9 @@ class AddressCrudController extends AbstractCrudController
             IntegerField::new("streetNumber"),
             ChoiceField::new('streetWay')
             ->setChoices([
-                'Rue'=> AddressWay::ST->value,
-                'Boulevard' => AddressWay::BLV->value,
-                'Avenue' => AddressWay::AVN->value,
+                'Rue'=> AddressWay::ST,
+                'Boulevard' => AddressWay::BLV,
+                'Avenue' => AddressWay::AVN,
             ]),  
             TextField::new('streetName'),
             TextField::new('streetComplementary'),
