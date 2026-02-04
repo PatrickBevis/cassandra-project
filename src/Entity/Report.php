@@ -31,28 +31,18 @@ class Report
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    /**
-     * @var Collection<int, Audit>
-     */
-    #[ORM\OneToMany(targetEntity: Audit::class, mappedBy: 'report')]
-    private Collection $audit;
-
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'reports')]
-    private Collection $user;
-
     #[ORM\Column(length: 30)]
     private ?string $writtenBy = null;
 
+   
+    
+
+   
+
     public function __construct()
     {
-        $this->audit = new ArrayCollection();
-        $this->user = new ArrayCollection();
+       
+       
     }
 
     public function getId(): ?int
@@ -120,75 +110,6 @@ class Report
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-     public function __toString(): string
-    {
-        return $this->title ?? '';
-    }
-    /**
-     * @return Collection<int, Audit>
-     */
-    public function getAudit(): Collection
-    {
-        return $this->audit;
-    }
-
-    public function addAudit(Audit $audit): static
-    {
-        if (!$this->audit->contains($audit)) {
-            $this->audit->add($audit);
-            $audit->setReport($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAudit(Audit $audit): static
-    {
-        if ($this->audit->removeElement($audit)) {
-            // set the owning side to null (unless already changed)
-            if ($audit->getReport() === $this) {
-                $audit->setReport(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        $this->user->removeElement($user);
-
-        return $this;
-    }
-
     public function getWrittenBy(): ?string
     {
         return $this->writtenBy;
@@ -199,5 +120,10 @@ class Report
         $this->writtenBy = $writtenBy;
 
         return $this;
+    }
+    
+  public function __toString(): string
+    {
+        return $this->title ?? '';
     }
 }

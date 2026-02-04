@@ -37,12 +37,11 @@ class AddressCrudController extends AbstractCrudController
             TextField::new('City'),
             TextField::new('Country'),
             BooleanField::new('is_EU'),
-            AssociationField::new('customer')
-            ->setLabel('Customer')
-            ->formatValue(fn($customer) =>
-                $customer->getCompanyName()
-            ),
-            BooleanField::new('is_deleted'),
+            // AssociationField::new('customer')
+            // ->setLabel('Customer')
+            // ->formatValue(fn($customer) =>
+            //     $customer->getCompanyName()
+            // ),
 
 
 

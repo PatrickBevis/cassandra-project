@@ -32,29 +32,10 @@ class Invoice
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $price_withtax = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    /**
-     * @var Collection<int, Tax>
-     */
-    #[ORM\ManyToMany(targetEntity: Tax::class, mappedBy: 'invoice')]
-    private Collection $taxes;
-
-    /**
-     * @var Collection<int, Customer>
-     */
-    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'invoice')]
-    private Collection $customers;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $total = null;
 
-    public function __construct()
-    {
-        $this->taxes = new ArrayCollection();
-        $this->customers = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -132,75 +113,5 @@ class Invoice
 
         return $this;
     }
-    
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tax>
-     */
-    public function getTaxes(): Collection
-    {
-        return $this->taxes;
-    }
-
-    public function addTax(Tax $tax): static
-    {
-        if (!$this->taxes->contains($tax)) {
-            $this->taxes->add($tax);
-            $tax->addInvoice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTax(Tax $tax): static
-    {
-        if ($this->taxes->removeElement($tax)) {
-            $tax->removeInvoice($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Customer>
-     */
-    public function getCustomers(): Collection
-    {
-        return $this->customers;
-    }
-
-    public function addCustomer(Customer $customer): static
-    {
-        if (!$this->customers->contains($customer)) {
-            $this->customers->add($customer);
-            $customer->setInvoice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): static
-    {
-        if ($this->customers->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getInvoice() === $this) {
-                $customer->setInvoice(null);
-            }
-        }
-
-        return $this;
-    }
-
     
 }

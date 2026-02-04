@@ -46,14 +46,6 @@ class Customer
     )]
     private ?string $phone_number = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    #[ORM\ManyToOne(inversedBy: 'customers')]
-    private ?Invoice $invoice = null;
-
-    #[ORM\ManyToOne(inversedBy: 'customer')]
-    private ?Address $address = null;
 
     public function getId(): ?int
     {
@@ -108,39 +100,5 @@ class Customer
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    public function getInvoice(): ?Invoice
-    {
-        return $this->invoice;
-    }
-
-    public function setInvoice(?Invoice $invoice): static
-    {
-        $this->invoice = $invoice;
-
-        return $this;
-    }
-
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): static
-    {
-        $this->address = $address;
-
-        return $this;
-    }
+    
 }

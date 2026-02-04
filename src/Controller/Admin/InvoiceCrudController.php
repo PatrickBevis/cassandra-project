@@ -37,14 +37,14 @@ class InvoiceCrudController extends AbstractCrudController
                 ]),
             DateTimeField::new('created_at')->hideOnForm(),
             NumberField::new('priceTaxFree')->setDecimalSeparator(','),
-            AssociationField::new('tax')
-            ->setLabel('tax')
-            ->formatValue(fn($invoice) =>
-                $invoice->getTaxes()->value
-            ),
+            // AssociationField::new('tax')
+            // ->setLabel('tax')
+            // ->formatValue(fn($invoice) =>
+            //     $invoice->getTaxes()->value
+            // ),
             NumberField::new('priceWithTax')->setDecimalSeparator(','),
             NumberField::new('total'),
-            BooleanField::new('is_deleted'),
+            
         ];
     }
     

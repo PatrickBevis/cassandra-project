@@ -40,20 +40,7 @@ class Address
     #[ORM\Column]
     private ?bool $is_EU = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    /**
-     * @var Collection<int, Customer>
-     */
-    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'address')]
-    private Collection $customer;
-
-    public function __construct()
-    {
-        $this->customer = new ArrayCollection();
-    }
-
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -155,45 +142,7 @@ class Address
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
+    
 
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Customer>
-     */
-    public function getCustomer(): Collection
-    {
-        return $this->customer;
-    }
-
-    public function addCustomer(Customer $customer): static
-    {
-        if (!$this->customer->contains($customer)) {
-            $this->customer->add($customer);
-            $customer->setAddress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): static
-    {
-        if ($this->customer->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getAddress() === $this) {
-                $customer->setAddress(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }

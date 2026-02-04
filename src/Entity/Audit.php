@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Enum\AuditStatus;
 use App\Repository\AuditRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AuditRepository::class)]
@@ -31,24 +29,7 @@ class Audit
     #[ORM\Column(enumType: AuditStatus::class)]
     private ?AuditStatus $status = null;
 
-    #[ORM\Column]
-    private ?bool $is_deleted = null;
-
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'audits')]
-    private Collection $user;
-
-    #[ORM\ManyToOne(inversedBy: 'audit')]
-    private ?Report $report = null;
-
-   
-
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
+ 
 
     public function getId(): ?int
     {
@@ -115,53 +96,4 @@ class Audit
         return $this;
     }
 
-    public function isDeleted(): ?bool
-    {
-        return $this->is_deleted;
-    }
-
-    public function setIsDeleted(bool $is_deleted): static
-    {
-        $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        $this->user->removeElement($user);
-
-        return $this;
-    }
-
-    public function getReport(): ?Report
-    {
-        return $this->report;
-    }
-
-    public function setReport(?Report $report): static
-    {
-        $this->report = $report;
-
-        return $this;
-    }
-
-    
 }
