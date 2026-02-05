@@ -42,12 +42,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+     /**
+     * @var Collection<int, Audit>
+     */
+    #[ORM\ManyToMany(targetEntity: Audit::class, mappedBy: 'user')]
+    private Collection $audits;
+
+    /**
+     * @var Collection<int, Report>
+     */
+    #[ORM\ManyToMany(targetEntity: Report::class, mappedBy: 'user')]
+    private Collection $reports;
+
    
-    
+    public function __construct()
+{
+    $this->created_at = new \DateTimeImmutable();
+    $this->audits = new ArrayCollection();
+    $this->reports = new ArrayCollection();
+}
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+    
+ public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $Lastname): static
+    {
+        $this->lastname = $Lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $Firstname): static
+    {
+        $this->firstname = $Firstname;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -126,30 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // @deprecated, to be removed when upgrading to Symfony 8
     }
 
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $Lastname): static
-    {
-        $this->lastname = $Lastname;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $Firstname): static
-    {
-        $this->firstname = $Firstname;
-
-        return $this;
-    }
-
+   
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
@@ -162,5 +181,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   
+     /**
+     * @return Collection<int, Audit>
+     */
+    public function getAudits(): Collection
+    {
+        return $this->audits;
+    }
+
+    public function addAudit(Audit $audit): static
+    {
+        if (!$this->audits->contains($audit)) {
+            $this->audits->add($audit);
+            $audit->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudit(Audit $audit): static
+    {
+        if ($this->audits->removeElement($audit)) {
+            $audit->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Report>
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): static
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+            $report->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): static
+    {
+        if ($this->reports->removeElement($report)) {
+            $report->removeUser($this);
+        }
+
+        return $this;
+    }
 }
+

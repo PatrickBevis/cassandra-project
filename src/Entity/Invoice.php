@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Enum\InvoiceStatus;
 use App\Repository\InvoiceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,10 +30,20 @@ class Invoice
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $price_withtax = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customer $customer = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
-    private ?string $total = null;
+    #[ORM\ManyToOne(inversedBy: 'invoice')]
+    private ?Tax $tax = null;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -50,7 +58,6 @@ class Invoice
     public function setNumber(int $number): static
     {
         $this->number = $number;
-
         return $this;
     }
 
@@ -62,7 +69,6 @@ class Invoice
     public function setStatus(InvoiceStatus $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -74,7 +80,6 @@ class Invoice
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 
@@ -86,7 +91,6 @@ class Invoice
     public function setPriceTaxfree(string $price_taxfree): static
     {
         $this->price_taxfree = $price_taxfree;
-
         return $this;
     }
 
@@ -98,20 +102,34 @@ class Invoice
     public function setPriceWithtax(string $price_withtax): static
     {
         $this->price_withtax = $price_withtax;
-
         return $this;
     }
 
-    public function getTotal(): ?string
+    public function getCustomer(): ?Customer
     {
-        return $this->total;
+        return $this->customer;
     }
 
-    public function setTotal(string $total): static
+    public function setCustomer(?Customer $customer): static
     {
-        $this->total = $total;
-
+        $this->customer = $customer;
         return $this;
     }
-    
+
+    public function getTax(): ?Tax
+    {
+        return $this->tax;
+    }
+
+    public function setTax(?Tax $tax): static
+    {
+        $this->tax = $tax;
+        return $this;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->number !== null ? (string) $this->number : 'Invoice';
+    }
 }

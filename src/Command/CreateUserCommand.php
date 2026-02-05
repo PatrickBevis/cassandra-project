@@ -30,15 +30,18 @@ class CreateUserCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('email', InputArgument::REQUIRED, 'Email de l’utilisateur')
-            ->addArgument('password', InputArgument::REQUIRED, 'Mot de passe en clair (sera hashé)')
-            ->addArgument('roles', InputArgument::OPTIONAL, 'Rôles séparés par des virgules (ex: ROLE_ADMIN,ROLE_USER)', 'ROLE_USER')
+            ->addArgument('firstName', InputArgument::REQUIRED, 'users first name')
+            ->addArgument('lastName', InputArgument::REQUIRED, 'users last name')
+            ->addArgument('email', InputArgument::REQUIRED, 'users email')
+            ->addArgument('password', InputArgument::REQUIRED, 'password not hashed (it will be later)')
+            ->addArgument('roles', InputArgument::OPTIONAL, 'separated roles with virgules (ex: ROLE_ADMIN,ROLE_USER)', 'ROLE_USER')
             ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
+        $firstName = (string) $input->getArgument('firstName');
+        $lastName = (string) $input->getArgument('lastName');
         $email = (string) $input->getArgument('email');
         $plainPassword = (string) $input->getArgument('password');
         $roleString = (string) $input->getArgument('roles');
@@ -48,6 +51,8 @@ class CreateUserCommand extends Command
         $roles = array_values(array_filter($roles));
 
         $user = new User();
+        $user->setFirstname($firstName);
+        $user->setLastname($lastName);
         $user->setEmail($email);
         $user->setRoles($roles);
 
@@ -59,11 +64,13 @@ class CreateUserCommand extends Command
         // flush = Doctrine exécute réellement l’insertion en base
         $this->em->persist($user);
         $this->em->flush();
-
-        $output->writeln('Utilisateur créé : '.$email);
+        
+        $output->writeln('User first name : '.$firstName);
+        $output->writeln('User last name : '.$lastName);
+        $output->writeln('User email : '.$email);
         //$output->writeln('Voici le mot de passe : '.$plainPassword);
         //$output->writeln('Voici le hash : '.$hashedPassword);
-        $output->writeln('Rôles : '.implode(', ', $roles));
+        $output->writeln('Roles : '.implode(', ', $roles));
         
         return Command::SUCCESS;
     }

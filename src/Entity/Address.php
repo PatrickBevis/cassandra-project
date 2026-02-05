@@ -40,7 +40,17 @@ class Address
     #[ORM\Column]
     private ?bool $is_EU = null;
 
-   
+       /**
+     * @var Collection<int, Customer>
+     */
+    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'address')]
+    private Collection $customer;
+
+    public function __construct()
+    {
+        $this->customer = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,7 +152,66 @@ class Address
         return $this;
     }
 
+    public function __toString(): string
+    {
+        $parts = [];
     
+    if ($this->getStreetNumber()) {
+        $parts[] = $this->getStreetNumber();
+    }
 
-   
+    if ($this->getStreetWay()) {
+        $parts[] = $this->getStreetWay()->value;
+    }
+
+
+    if ($this->getStreetName()) {
+        $parts[] = $this->getStreetName();
+    }
+
+    if ($this->getStreetComplementary()) {
+        $parts[] = $this->getStreetComplementary();
+    }
+
+    if ($this->getZip()) {
+        $parts[] = $this->getZip();
+    }
+
+
+    if ($this->getCity()) {
+        $parts[] = $this->getCity();
+    }
+
+    return !empty($parts) ? implode(' ', $parts) : 'Address';
+    }
+
+    /**
+     * @return Collection<int, Customer>
+     */
+    public function getCustomer(): Collection
+    {
+        return $this->customer;
+    }
+
+    public function addCustomer(Customer $customer): static
+    {
+        if (!$this->customer->contains($customer)) {
+            $this->customer->add($customer);
+            $customer->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCustomer(Customer $customer): static
+    {
+        if ($this->customer->removeElement($customer)) {
+            // set the owning side to null (unless already changed)
+            if ($customer->getAddress() === $this) {
+                $customer->setAddress(null);
+            }
+        }
+
+        return $this;
+    }
 }
