@@ -32,11 +32,11 @@ class AuditCrudController extends AbstractCrudController
                 'InProgress' => AuditStatus::INPROG,
                 'Ended' => AuditStatus::ENDED,
             ]),  
-        // AssociationField::new('report')
-        //     ->setLabel('Reports')
-        //     ->formatValue(fn($report) =>
-        //         $report?->getTitle()
-        //     ),
+        AssociationField::new('report')
+            ->setLabel('Reports')
+            ->formatValue(fn($report) =>
+                $report?->getTitle()
+            ),
     ];
     }
     
