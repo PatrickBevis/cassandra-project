@@ -24,6 +24,14 @@ class Customer
     #[Assert\NotBlank(message: "Obligatory field")]
     private ?string $company_name = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\Regex(pattern: Regex::NAME, message: 'Dont forget the first capital letter')]
+    private ?string $first_name = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\Regex(pattern: Regex::NAME, message: 'Dont forget the first capital letter')]
+    private ?string $last_name = null;
+
     #[ORM\Column(length: 30, unique: true)]
     #[Assert\NotBlank(message: "Obligatory field")]
     #[Assert\Regex(pattern: Regex::EMAIL, message: 'Invalid email')]
@@ -47,6 +55,8 @@ class Customer
     #[ORM\ManyToOne(inversedBy: 'customers')]
     private ?Address $address = null;
 
+   
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -68,7 +78,29 @@ class Customer
         $this->company_name = $company_name;
         return $this;
     }
+     public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
 
+    public function setFirstName(?string $first_name): static
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->last_name;
+    }
+
+    public function setLastName(?string $last_name): static
+    {
+        $this->last_name = $last_name;
+
+        return $this;
+    }
     public function getEmail(): ?string
     {
         return $this->email;
@@ -146,4 +178,6 @@ class Customer
     {
         return $this->company_name ?? 'Customer';
     }
+
+   
 }
