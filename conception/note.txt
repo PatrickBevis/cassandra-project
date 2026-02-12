@@ -28,3 +28,9 @@ Agent IA
 
 rm -rf var/cache/prod
 APP_ENV=prod APP_DEBUG=0 symfony server:start
+
+
+////////
+
+
+Création widget react llm local
