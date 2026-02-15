@@ -8,7 +8,6 @@ use App\Entity\Audit;
 use App\Entity\Customer;
 use App\Entity\Invoice;
 use App\Entity\Report;
-use App\Entity\Role;
 use App\Entity\Tax;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -17,16 +16,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
+#[IsGranted('ROLE_ADMIN')] 
 class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
 
-     $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-     return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
-
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -37,14 +37,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Roles', 'fas fa-socks', Role::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-socks', User::class);
         yield MenuItem::linkToCrud('Audits', 'fas fa-hotel', Audit::class);
         yield MenuItem::linkToCrud('Reports', 'fas fa-pen', Report::class);
-        yield MenuItem::linkToCrud('Customers', 'fas fa-users', Customer::class);
+        yield MenuItem::linkToCrud('Customers', 'fas fa-user', Customer::class);
         yield MenuItem::linkToCrud('Addresses', 'fas fa-street-view', Address::class);
         yield MenuItem::linkToCrud('Invoices', 'fas  fa-file-invoice-dollar', Invoice::class);
         yield MenuItem::linkToCrud('Taxes', 'fas  fa-money-check', Tax::class);
-
     }
 }

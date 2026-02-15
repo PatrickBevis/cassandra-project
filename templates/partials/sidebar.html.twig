@@ -9,11 +9,33 @@
       <a href="{{ path('home') }}" class="hover:text-gray-100">
         Home
       </a>
-      
+      {% if is_granted('ROLE_ADMIN') %}
+       <a href="{{ path('admin') }}">Admin</a>
+      {% endif %}
     </div>
-
+   
+   
     <div class="mt-auto text-sm  text-violet-400">
-    <a href="{{ path('app_legals_notices') }}" class="hover:text-gray-100"> Legals notices</a> |
+
+    <div class="flex flex-col text-white mb-12 text-xl font-bold">
+    {% if app.user %}
+        {{ app.user.firstname }} {{ app.user.lastname }}
+         <a href="{{ path('app_logout') }}" class="btn bg-white text-violet-700 text-center mt-12 px-6 py-2 font-bold hover:cursor-pointer">
+            Log out
+        </a>
+    {% else %}
+        <a href="{{ path('app_login') }}" class="btn bg-white text-violet-700 text-center px-6 py-2 font-bold hover:cursor-pointer">
+            Log in
+        </a>
+        <p class='text-center'>OR</p>
+         <a href="{{ path('app_register') }}" class="btn bg-white text-violet-700 text-center px-6 py-2 font-bold hover:cursor-pointer">
+            Register
+        </a>
+    {% endif %}
+</div>
+
+      
+        <a href="{{ path('app_legals_notices') }}" class="hover:text-gray-100"> Legals notices</a> |
         <a href="{{ path('app_accessibility') }}" class="hover:text-gray-100">Accessibility</a> |
         <a href="{{ path('app_cookies') }}" class="hover:text-gray-100">Cookies</a> |
         <a href="{{ path('app_privacy') }}" class="hover:text-gray-100">Privacy politcs</a> |

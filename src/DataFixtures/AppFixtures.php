@@ -4,9 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Audit;
 use App\Entity\User;
-use App\Entity\Role;
-use App\Enum\RoleCode;
-use App\Entity\Customer;
 use App\Entity\Report;
 use App\Enum\AuditStatus;
 use App\Enum\ReportType;
@@ -20,34 +17,14 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        $roleAdmin = new Role();
-        $roleAdmin->setCode(RoleCode::ADMIN);
-        $roleAdmin->setLibelle('Administrateur');
-        $manager->persist($roleAdmin);
-
-        $roleAuditor = new Role();
-        $roleAuditor->setCode(RoleCode::AUDITOR);
-        $roleAuditor->setLibelle('Auditeur');
-        $manager->persist($roleAuditor);
-        
-        $roleExaminer = new Role();
-        $roleExaminer->setCode(RoleCode::EXAMINER);
-        $roleExaminer->setLibelle('Examinateur');
-        $manager->persist($roleExaminer);
-        
-        $roleStaff = new Role();
-        $roleStaff->setCode(RoleCode::STAFF);
-        $roleStaff->setLibelle('Staff');
-        $manager->persist($roleStaff);
 
         $user1 = new User();
         $user1->setLastname("Bambou");
         $user1->setFirstname("Agathe");
         $user1->setEmail("agathe.b@fluffy.fr");
-        $user1->setPassword("123");
+        $user1->setPassword("&23"); 
         $user1->setCreatedAt(new \DateTimeImmutable('1988-06-12'));
-        $user1->setRole($roleAdmin);
-       
+        
         $manager->persist($user1);
 
         $user2 = new User();
@@ -56,8 +33,7 @@ class AppFixtures extends Fixture
         $user2->setEmail("louis.d@fluffy.fr");
         $user2->setPassword("123");
         $user2->setCreatedAt(new \DateTimeImmutable('1998-03-25'));
-        $user2->setRole($roleStaff);
-      
+       
         $manager->persist($user2);
         
         $user3 = new User();
@@ -66,8 +42,7 @@ class AppFixtures extends Fixture
         $user3->setEmail("claire.m@fluffy.fr");
         $user3->setPassword("123");
         $user3->setCreatedAt(new \DateTimeImmutable('2000-11-07'));
-        $user3->setRole($roleStaff);
-        
+       
         $manager->persist($user3);
         
         $user4 = new User();
@@ -76,8 +51,7 @@ class AppFixtures extends Fixture
         $user4->setEmail("huy.n@fluffy.fr");
         $user4->setPassword("123");
         $user4->setCreatedAt(new \DateTimeImmutable('2001-08-19'));
-        $user4->setRole($roleAuditor);
-      
+        
         $manager->persist($user4);
         
         $user5 = new User();
@@ -86,7 +60,6 @@ class AppFixtures extends Fixture
         $user5->setEmail("sofia.l@fluffy.fr");
         $user5->setPassword("123");
         $user5->setCreatedAt(new \DateTimeImmutable('1999-02-14'));
-        $user5->setRole($roleExaminer);
         
         $manager->persist($user5);
 
@@ -97,7 +70,6 @@ class AppFixtures extends Fixture
         $report1->setBitsLength(32);
         $report1->setCreatedAt(new \DateTimeImmutable('2025-12-22'));
         $report1->setWrittenBy($user2->getFirstname().' '.$user2->getLastname());
-      
         $manager->persist($report1);
 
         $audit1 = new Audit();
@@ -106,15 +78,12 @@ class AppFixtures extends Fixture
         $audit1->setCreatedAt(new \DateTimeImmutable('2025-11-20'));
         $audit1->setEndedAt(new \DateTimeImmutable('2025-12-20'));
         $audit1->setStatus(AuditStatus::ENDED);
-        $audit1->setReport($report1);
-      
         $manager->persist($audit1);
 
         $audit2 = new Audit();
         $audit2->setTitle("Audit surement sympa");
         $audit2->setCreatedAt(new \DateTimeImmutable('2026-01-18'));
         $audit2->setStatus(AuditStatus::ASKED);
-       
         $manager->persist($audit2);
 
         $audit3 = new Audit();
@@ -122,7 +91,7 @@ class AppFixtures extends Fixture
         $audit3->setAuditInspectorName($user4->getFirstname().' '.$user4->getLastname());
         $audit3->setCreatedAt(new \DateTimeImmutable('2025-12-28'));
         $audit3->setStatus(AuditStatus::INPROG);
-        
+
         $manager->persist($audit3);
 
         

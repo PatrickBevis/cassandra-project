@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Error !!!{% endblock %}
+{% block title %}Error {{status_code}} ! {% endblock %}
 
 {% block body %}
 
 <div class="h-screen flex items-center justify-center">
     <div class="flex flex-col text-8xl font-bold text-left">
-        <p class="text-violet-400">404</p>
-        <p>Page</p>
-        <p>Not</p>
-        <p>Found...</p>
-        <p class="mt-45 rotate-90">:(</p>
+
+        <p class="text-violet-400">{{status_code}}</p>
+        <p>{{status_text}}...</p>
+        <p class='flex justify-center rotate-90'>:(</p>
          </div>
          
          

@@ -22,3 +22,8 @@ document Audit enum juridique ou non
 gerer la certification 
 
 Agent IA
+
+//// modifier en prod/////
+
+rm -rf var/cache/prod
+APP_ENV=prod APP_DEBUG=0 symfony server:start

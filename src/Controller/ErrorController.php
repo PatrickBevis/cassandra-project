@@ -8,10 +8,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ErrorController extends AbstractController
 {
-    #[Route('/error', name: 'app_error')]
-    public function index(): Response
+    #[Route('/error-403', name: 'app_errore')]
+    public function forbidden(): Response
     {
-        return $this->render('error/index.html.twig', [
+        return $this->render('bundles/TwigBundle/Exception/error403.html.twig', [
+            'controller_name' => 'ErrorController',
+        ]);
+    }
+
+    #[Route('/error-404', name: 'app_error')]
+    public function notFound(): Response
+    {
+        return $this->render('bundles/TwigBundle/Exception/error404.html.twig', [
             'controller_name' => 'ErrorController',
         ]);
     }

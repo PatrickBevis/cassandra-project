@@ -27,9 +27,11 @@ class CustomerCrudController extends AbstractCrudController
             EmailField::new('email'),
             TextField::new('siretNumber'),
             TextField::new('phoneNumber'),
-            AssociationField::new('address')
-            ->setLabel('Address'),
-           
+            AssociationField::new('invoice')
+            ->setLabel('Invoice')
+            ->formatValue(fn($invoice) =>
+                $invoice->getNumber()
+            ),
 
         ];
     }
