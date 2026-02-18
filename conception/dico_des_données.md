@@ -12,18 +12,19 @@
 | Id_role              | role_id               | Id, PK               | INT              | role      | 🟥  |
 | code                 | role_code             | code                 | VARCHAR(30)      | role      | 🟥  |
 | is_deleted           | role_deleted          | deleted              | LOGICAL          | role      | 🟥  |
-| Id_adress            | adr_id                | Id, PK               | INT              | adress    | 🟦  |
-| street_number        | adr_num               | street number        | INT              | adress    | 🟦  |
-| street_name          | adr_name              | street name          | VARCHAR(30)      | adress    | 🟦  |
-| complementary        | adr_compl             | adress complementary | VARCHAR(50)      | adress    | 🟦  |
-| zip                  | adr_zip               | zip                  | INT              | adress    | 🟦  |
-| city                 | adr_city              | city                 | VARCHAR(30)      | adress    | 🟦  |
-| country              | adr_country           | country              | VARCHAR(20)      | adress    | 🟦  |
-| is_eu                | adr_eu                | european union       | LOGICAL          | adress    | 🟦  |
-| is_deleted           | adr_deleted           | is_deleted           | LOGICAL          | adress    | 🟦  |
+| Id_adress            | adr_id                | Id, PK               | INT              | address   | 🟦  |
+| street_number        | adr_num               | street number        | INT              | address   | 🟦  |
+| street_way           | adr_way               | street way           | ENUM             | address   | 🟦  |
+| street_name          | adr_name              | street name          | VARCHAR(30)      | address   | 🟦  |
+| complementary        | adr_compl             | adress complementary | VARCHAR(50)      | address   | 🟦  |
+| zip                  | adr_zip               | zip                  | INT              | address   | 🟦  |
+| city                 | adr_city              | city                 | VARCHAR(30)      | address   | 🟦  |
+| country              | adr_country           | country              | VARCHAR(20)      | address   | 🟦  |
+| is_eu                | adr_eu                | european union       | LOGICAL          | address   | 🟦  |
+| is_deleted           | adr_deleted           | is_deleted           | LOGICAL          | address   | 🟦  |
 | Id_invoice           | invoice_id            | Id, PK               | INT              | invoice   | 🟪  |
 | number               | invoice_num           | invoice number       | INT              | invoice   | 🟪  |
-| status               | invoice_stat          | status               | LOGICAL          | invoice   | 🟪  |
+| status               | invoice_stat          | status               | ENUM             | invoice   | 🟪  |
 | price_taxfree        | invoice_price_taxfree | price tax free       | DECIMAL(6,2)     | invoice   | 🟪  |
 | price_withtax        | invoice_price_withtax | price with tax       | DECIMAL(6,2)     | invoice   | 🟪  |
 | price_total          | invoice_price_total   | price total          | DECIMAL(6,2)     | invoice   | 🟪  |
@@ -35,10 +36,10 @@
 | audit_inspector_name | audit_inspector_name  | inspector name       | VARCHAR(30)      | audit     | ⬛  |
 | created_at           | audit_created         | created              | DATE             | audit     | ⬛  |
 | ended_at             | audit_ended           | ended                | DATE             | audit     | ⬛  |
-| statut               | audit_statut          | status               | VARCHAR(30)      | audit     | ⬛  |
+| statut               | audit_statut          | status               | ENUM             | audit     | ⬛  |
 | is_deleted           | audit_deleted         | deleted              | LOGICAL          | audit     | ⬛  |
 | Id_report            | report_id             | Id, PK               | INT              | report    | 🟧  |
-| type                 | report_type           | type                 | VARCHAR(30)      | report    | 🟧  |
+| type                 | report_type           | type                 | ENUM             | report    | 🟧  |
 | name                 | report_name           | name                 | VARCHAR(30)      | report    | 🟧  |
 | path                 | report_path           | path                 | VARCHAR(125)     | report    | 🟧  |
 | bits_length          | report_bits_length    | bits length          | INT              | report    | 🟧  |

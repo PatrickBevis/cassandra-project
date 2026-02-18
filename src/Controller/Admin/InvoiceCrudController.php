@@ -24,6 +24,11 @@ class InvoiceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            AssociationField::new('customer')
+            ->setLabel('customer')
+            ->formatValue(fn($customer) =>
+                $customer->getTaxes()->value
+            ),
             IntegerField::new("number"),
             ChoiceField::new('status', 'Status')
             ->setChoices([
