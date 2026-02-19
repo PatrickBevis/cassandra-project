@@ -8,6 +8,11 @@ revoir entity tax decimal -> enum
 revoir le mcd tax taux -> rate
 revoir le mcd invoice -> total
 
+/// 19 février 2026
+
+erreur d'invoice
+
+
 
 Peut-on  definir un user qui a un role specifique pour audit ?
 "Encadrer le cahier des charges ne prévoit pas ce cas de figure mais on reste à l'écoute du client pour des modifs"

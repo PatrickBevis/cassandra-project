@@ -27,7 +27,7 @@ class InvoiceCrudController extends AbstractCrudController
             AssociationField::new('customer')
             ->setLabel('customer')
             ->formatValue(fn($customer) =>
-                $customer->getTaxes()->value
+                $customer->getTax()->value
             ),
             IntegerField::new("number"),
             ChoiceField::new('status', 'Status')
@@ -41,7 +41,7 @@ class InvoiceCrudController extends AbstractCrudController
             AssociationField::new('tax')
             ->setLabel('tax')
             ->formatValue(fn($invoice) =>
-                $invoice->getTaxes()->value
+                $invoice->getTax()->value
             ),
             NumberField::new('priceWithTax')->setDecimalSeparator(','),
             
