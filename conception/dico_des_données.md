@@ -11,7 +11,6 @@
 | is_deleted           | user_deleted          | is_deleted           | LOGICAL          | user      | 🟩  |
 | Id_role              | role_id               | Id, PK               | INT              | role      | 🟥  |
 | code                 | role_code             | code                 | VARCHAR(30)      | role      | 🟥  |
-| is_deleted           | role_deleted          | deleted              | LOGICAL          | role      | 🟥  |
 | Id_adress            | adr_id                | Id, PK               | INT              | address   | 🟦  |
 | street_number        | adr_num               | street number        | INT              | address   | 🟦  |
 | street_way           | adr_way               | street way           | ENUM             | address   | 🟦  |
@@ -21,14 +20,12 @@
 | city                 | adr_city              | city                 | VARCHAR(30)      | address   | 🟦  |
 | country              | adr_country           | country              | VARCHAR(20)      | address   | 🟦  |
 | is_eu                | adr_eu                | european union       | LOGICAL          | address   | 🟦  |
-| is_deleted           | adr_deleted           | is_deleted           | LOGICAL          | address   | 🟦  |
 | Id_invoice           | invoice_id            | Id, PK               | INT              | invoice   | 🟪  |
 | number               | invoice_num           | invoice number       | INT              | invoice   | 🟪  |
 | status               | invoice_stat          | status               | ENUM             | invoice   | 🟪  |
 | price_taxfree        | invoice_price_taxfree | price tax free       | DECIMAL(6,2)     | invoice   | 🟪  |
 | price_withtax        | invoice_price_withtax | price with tax       | DECIMAL(6,2)     | invoice   | 🟪  |
 | price_total          | invoice_price_total   | price total          | DECIMAL(6,2)     | invoice   | 🟪  |
-| is_deleted           | invoice_deleted       | deleted              | LOGICAL          | invoice   | 🟪  |
 | Id_tax               | tax_id                | Id, PK               | INT              | tax       | 🟨  |
 | rate                 | tax_rate              | rate tax             | ENUM             | tax       | 🟨  |
 | Id_audit             | audit_id              | Id, PK               | INT              | audit     | ⬛  |
@@ -37,17 +34,14 @@
 | created_at           | audit_created         | created              | DATE             | audit     | ⬛  |
 | ended_at             | audit_ended           | ended                | DATE             | audit     | ⬛  |
 | statut               | audit_statut          | status               | ENUM             | audit     | ⬛  |
-| is_deleted           | audit_deleted         | deleted              | LOGICAL          | audit     | ⬛  |
 | Id_report            | report_id             | Id, PK               | INT              | report    | 🟧  |
 | type                 | report_type           | type                 | ENUM             | report    | 🟧  |
 | name                 | report_name           | name                 | VARCHAR(30)      | report    | 🟧  |
 | path                 | report_path           | path                 | VARCHAR(125)     | report    | 🟧  |
 | bits_length          | report_bits_length    | bits length          | INT              | report    | 🟧  |
 | created_at           | report_created        | created              | DATE             | report    | 🟧  |
-| is_deleted           | report_deleted        | deleted              | LOGICAL          | report    | 🟧  |
 | Id_customer          | customer_id           | Id, PK               | INT              | customer  | ⬜  |
 | company_name         | customer_comp         | company name         | VARCHAR(50)      | customer  | ⬜  |
 | statut               | customer_id           | Id, PK               | VARCHAR(20)      | customer  | ⬜  |
 | siret_number         | customer_siret        | siret number         | INT              | customer  | ⬜  |
 | phone_number         | customer_phone        | phone number         | INT              | customer  | ⬜  |
-| is_deleted           | customer_deleted      | deleted              | LOGICAL          | customer  | ⬜  |

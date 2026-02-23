@@ -7,6 +7,7 @@ revoir le mcd adress -> add street_way
 revoir entity tax decimal -> enum
 revoir le mcd tax taux -> rate
 revoir le mcd invoice -> total
+revoir le mcd invoice number iny -> string
 
 /// 19 février 2026
 
