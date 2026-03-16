@@ -19,10 +19,24 @@ class AuditCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+
+         TextField::new('title'),
+         TextField::new('auditInspectorName'),
+         DateTimeField::new('created_at')->hideOnForm(),
+         DateTimeField::new('ended_at')->hideOnForm(),
+         ChoiceField::new('status')
+            ->setChoices([
+                'Asked'=> AuditStatus::ASKED->value,
+                'InProgress' => AuditStatus::INPROG->value,
+                'Ended' => AuditStatus::ENDED->value,
+            ]),  
+        AssociationField::new('report')
+            ->setLabel('Reports')
+            ->formatValue(fn($report) =>
+                $report?->getTitle()
+            ),
+    ];
+
     }
     */
 }

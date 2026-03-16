@@ -17,11 +17,27 @@ class InvoiceCrudController extends AbstractCrudController
         return Invoice::class;
     }
 
-   public function configureFields(string $pageName): iterable
-{
-    return [
-        // autres champs...
-        
-    ];
+
+    
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            IntegerField::new("number"),
+            ChoiceField::new('status', 'Status')
+            ->setChoices([
+                'Given' => InvoiceStatus::GIV,
+                'Payed' => InvoiceStatus::PYD,
+                'Cancelled' => InvoiceStatus::CND,
+                ]),
+            DateTimeField::new('created_at')->hideOnForm(),
+            NumberField::new('priceTaxFree')->setDecimalSeparator(','),
+            AssociationField::new('tax')
+            ->setLabel('tax'),
+            NumberField::new('priceWithTax')->setDecimalSeparator(','),
+            
+        ];
+    }
+    
+
 }
 }
