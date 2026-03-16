@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InvoiceRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Invoice
 {
     #[ORM\Id]
@@ -15,8 +16,20 @@ class Invoice
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $number = null;
+    #[ORM\Column(length:30, unique:true)]
+    private ?string $number = null;
+
+    #[ORM\PrePersist]
+    public function generateInvoiceNumber(): void
+    {
+    if ($this->number === null) {
+        $this->number = sprintf(
+            'INV-%s-%s',
+            date('Y'),
+            strtoupper(bin2hex(random_bytes(3)))
+            );
+        }
+    }
 
     #[ORM\Column(enumType: InvoiceStatus::class)]
     private ?InvoiceStatus $status = null;
@@ -50,7 +63,7 @@ class Invoice
         return $this->id;
     }
 
-    public function getNumber(): ?int
+    public function getNumber(): ?string
     {
         return $this->number;
     }

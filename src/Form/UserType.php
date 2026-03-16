@@ -19,7 +19,7 @@ class UserType extends AbstractType
             ->add('created_at', null, [
                 'widget' => 'single_text',
             ])
-            ->add('is_deleted')
+          
         ;
     }
 

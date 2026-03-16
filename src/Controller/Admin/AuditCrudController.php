@@ -3,12 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Audit;
-use App\Enum\AuditStatus;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AuditCrudController extends AbstractCrudController
@@ -18,10 +15,11 @@ class AuditCrudController extends AbstractCrudController
         return Audit::class;
     }
 
-    
+    /*
     public function configureFields(string $pageName): iterable
     {
         return [
+
          TextField::new('title'),
          TextField::new('auditInspectorName'),
          DateTimeField::new('created_at')->hideOnForm(),
@@ -38,6 +36,7 @@ class AuditCrudController extends AbstractCrudController
                 $report?->getTitle()
             ),
     ];
+
     }
-    
+    */
 }
