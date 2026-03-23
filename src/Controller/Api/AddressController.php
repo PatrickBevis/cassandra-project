@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Controller\Api;
 
 use App\Entity\Address;
@@ -23,7 +21,7 @@ class AddressController extends AbstractController{
     {
     $addresses = $addressRepository->findAll();
     $data = array_map(
-        fn(address $item) =>$addressMapper->addressToDto($item) , $addresses
+        fn(Address $item) =>$addressMapper->addressToDto($item) , $addresses
     );
     return $this->json($data);
 }
